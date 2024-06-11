@@ -1,18 +1,29 @@
 {% extends 'base.html.twig' %}
 
+{% block body %}
+    <div class="return-arrow">
+        <a href="{{ path('home_index') }}">{{ ux_icon('cil:arrow-left') }}</a>
+    </div>
+    <div class="contact-logo-container">
+        <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
+        <p class="logo-name">Géocode</p>
+    </div>
+
 <form action="post" class="contact-form">
-    <select class="form-select" aria-label="Default select example">
-        <option selected>Open this select menu</option>
+    <select class="form-select mb-3" aria-label="Default select example">
+        <option selected>Quel est le sujet de votre message ?</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
     </select>
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        {#<label for="exampleFormControlInput1" class="form-label">Email address</label>#}
+        <input type="email" class="form-control" id="title" name="title" placeholder="Titre de votre message">
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        {#<label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>#}
+        <textarea class="form-control" id="msgtxt" name="msgtxt" rows="3"></textarea>
     </div>
+    <button type="submit" class="btn btn-primary contact-submit">Submit</button>
 </form>
+{% endblock %}

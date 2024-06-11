@@ -1,6 +1,6 @@
 .footer-navbar {
-    height: 100px;
-    width: 500px;
+    height: 50px;
+    width: 350px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin: auto;
@@ -8,6 +8,7 @@
     justify-items: center;
     background-color: var(--primary-blue);
     border-radius: 16px;
+    margin-top: 4rem;
 }
 
 .footer-navbar svg {
