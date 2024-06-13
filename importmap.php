@@ -17,8 +17,8 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
-    'contact' => [
-        'path' => './assets/contact.js',
+    'map' => [
+        'path' => './assets/map.js',
         'entrypoint' => true,
     ],
     '@hotwired/stimulus' => [

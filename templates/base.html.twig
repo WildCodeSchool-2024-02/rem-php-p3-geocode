@@ -16,7 +16,9 @@
     <body>
 
         {% block body %}{% endblock %}
+        <div class="removeable-navbar">
+            {% include '/_includes/_footer-navbar.html.twig' %}
+        </div>
 
-        {% include '/_includes/_footer-navbar.html.twig' %}
     </body>
 </html>

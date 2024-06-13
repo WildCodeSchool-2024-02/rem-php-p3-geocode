@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="profile-main">
+        <section class="infos-user">
+            <article>
+                <p>Où allons nous aujourd'hui {{ app.user.firstname}} ?</p>
+                <div class="user-car">
+                    <p>car.name</p>
+                    <p>car.picture</p>
+                </div>
+            </article>
+        </section>
+        <section class="lower-half">
+            <section class="info-car">
+                <div>
+                    <p>Infos batterie :</p>
+                </div>
+                <div>
+                    <p>Distance restante :</p>
+                </div>
+            </section>
+            <section class="misc-infos">
+                <article class="weather-API">
+                    <h1>API Météo</h1>
+                </article>
+                <article class="misc-div">
+                    <h2>Dernière section</h2>
+                </article>
+            </section>
+        </section>
+    </main>
+{% endblock %}
