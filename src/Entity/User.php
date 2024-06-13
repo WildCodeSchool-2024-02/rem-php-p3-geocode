@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -45,6 +47,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
+
+    /**
+     * @var Collection<int, Message>
+     */
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Message::class, orphanRemoval: true)]
+    private Collection $messages;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -177,6 +190,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatar(?string $avatar): static
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): static
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): static
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getSender() === $this) {
+                $message->setSender(null);
+            }
+        }
 
         return $this;
     }
