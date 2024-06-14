@@ -8,9 +8,8 @@ import './bootstrap.js';
  * This file will be included onto the page via the importmap() Twig function,
  * which should already be in your base.html.twig.
  */
-import './styles/no-navbar.scss';
+import './styles/_map.scss';
+import './styles/_userProfile.scss';
 import './styles/_footer-navbar.scss';
-import './styles/_contact-form.scss';
-import './styles/_wcs.scss';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
