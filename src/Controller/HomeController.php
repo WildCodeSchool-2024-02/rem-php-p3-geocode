@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class HomeController extends AbstractController
 {
@@ -22,8 +23,10 @@ class HomeController extends AbstractController
     }
 
     #[Route('/map', name: 'map')]
-    public function map(StationsRepository $stationsRepository, SerializerInterface $serializer): Response
+    public function map(StationsRepository $stationsRepository, ObjectNormalizer $objectNormalizer): Response
     {
+        $normalizer = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizer, []);
         $stations = $stationsRepository->findAll();
         $stations = $serializer->normalize($stations);
 
@@ -31,8 +34,10 @@ class HomeController extends AbstractController
     }
 
     #[Route('/json', name: 'json')]
-    public function jsonTest(StationsRepository $stationsRepository, SerializerInterface $serializer): Response
+    public function jsonTest(StationsRepository $stationsRepository, ObjectNormalizer $objectNormalizer): Response
     {
+        $normalizer = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizer, []);
         $stations = $stationsRepository->findAll();
 
         $stations = $serializer->normalize($stations);
