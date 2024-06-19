@@ -7,7 +7,60 @@
 {% block body %}
     <main class="map-main">
         <section class="map-screen">
-            <h1 class="center-map">La map sera ici !</h1>
+            <div id="map"></div>
+            {{ dump(stations) }}
+            <!--
+              The `defer` attribute causes the script to execute after the full HTML
+              document has been parsed. For non-blocking uses, avoiding race conditions,
+              and consistent behavior across browsers, consider loading using Promises. See
+              https://developers.google.com/maps/documentation/javascript/load-maps-js-api
+              for more information.
+              -->
+            <script async
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsCbly8V_UsYc2E8ebpocsVe1JAHFgF6U&callback=initMap&v=weekly"
+                defer
+            ></script>
+            <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+            <script src='/assets/map.js'></script>
+            <script>
+                const stations = {{ stations | raw }};
+                const myLatLng = { lat: 50.63102272917646, lng: 3.054790378008385 };
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 12,
+                    center: myLatLng,
+                });
+
+                let infoWindow = new google.maps.InfoWindow({
+                    content: '<h3>Borne rechargeable</h3>' +
+                        '<button class="markr-btn">Delete me !</button>'
+                });
+
+                function addMarker(property)
+                {
+                    let marker = new google.maps.Marker({
+                        position: property.coords,
+                        map: map,
+                        title: "Hello World!",
+                    });
+
+                    marker.addListener('click', function () {
+                        infoWindow.setContent(property.name);
+                        infoWindow.open(map, marker);
+                    })
+
+                    return marker;
+                }
+                console.log(stations.length);
+                const markers = [];
+
+                for (let i = 0; i < stations.length; i++) {
+                    markers.push(addMarker({coords:{lat:stations[i].latitude, lng:stations[i].longitude}, name:stations[i].stationName}));
+                }
+                const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
+
+
+            </script>
             <div class="map-widget">
                 {% include '/_includes/_footer-navbar.html.twig' %}
             </div>
