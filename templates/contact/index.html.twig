@@ -3,6 +3,13 @@
 {% block title %}Liste des messages{% endblock %}
 
 {% block body %}
+    <div class="return-arrow">
+        <a href="{{ path('home_index') }}">{{ ux_icon('cil:arrow-left') }}</a>
+    </div>
+    <div class="contact-logo-container">
+        <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
+        <p class="logo-name">Géocode</p>
+    </div>
     <h1>Liste des messages</h1>
 
     <table class="table">
@@ -17,7 +24,8 @@
         {% for message in messages %}
             <tr>
                 <td>{{ message.id }}</td>
-                <td>{{ message.content }}</td>
+                <td>Expéditeur : {{ message.sender.firstname }} {{ message.sender.lastname }}<br>
+                {{ message.content }}</td>
                 <td>
                     <a href="{{ path('contact_message_show', {'id': message.id}) }}">show</a>
                     <a href="{{ path('contact_message_delete', {'id': message.id}) }}">delete</a>

@@ -19,6 +19,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             $message = new Message();
             $message->setContent($faker->sentence(20));
             $message->setSender($userReference);
+            $message->setTopic($this->getReference('topic_' . $faker->numberBetween(1, 3)));
             $manager->persist($message);
         }
 
@@ -28,7 +29,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            UserFixtures::class,
+            TopicFixtures::class,
         ];
     }
 }

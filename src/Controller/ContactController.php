@@ -4,18 +4,47 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Core\Security;
 use App\Repository\MessageRepository;
+use App\Entity\Message;
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Form\MessageType;
 
 #[Route('/contact', name: 'contact_')]
 class ContactController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function contactIndex(): Response
+    private $security;
+    private $entityManager;
+
+
+    public function __construct(Security $security, EntityManagerInterface $entityManager)
     {
-        return $this->render('contact/contact.html.twig');
+        $this->security = $security;
+        $this->entityManager = $entityManager;
+    }
+
+    #[Route('/', name: 'index')]
+    public function contactIndex(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->security->getUser();
+            if ($user instanceof User) {
+                $message->setSender($user);
+            }
+            $entityManager->persist($message);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre message a bien été envoyé');
+            return $this->redirectToRoute('contact_index');
+        }
+        return $this->render('contact/contact.html.twig', ['form' => $form]);
     }
 
     #[Route('/message', name: 'message_index', methods: ['GET'])]
@@ -28,7 +57,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('/message/{id}', name: 'message_show', methods: ['GET'])]
+    #[Route('/message/{message}', name: 'message_show', methods: ['GET'])]
     public function showMessage(Message $message): Response
     {
         return $this->render('contact/show.html.twig', [
@@ -43,7 +72,6 @@ class ContactController extends AbstractController
             $entityManager->remove($message);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('contact_index', [], Response::HTTP_SEE_OTHER);
     }
 }
