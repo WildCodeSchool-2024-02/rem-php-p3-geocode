@@ -17,8 +17,8 @@ use App\Form\MessageType;
 #[Route('/contact', name: 'contact_')]
 class ContactController extends AbstractController
 {
-    private $security;
-    private $entityManager;
+    private Security $security;
+    private EntityManagerInterface $entityManager;
 
 
     public function __construct(Security $security, EntityManagerInterface $entityManager)
