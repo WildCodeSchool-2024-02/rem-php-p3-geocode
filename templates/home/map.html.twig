@@ -6,7 +6,6 @@
 
 {% block body %}
     <main class="map-main">
-
         <section class="map-screen">
             <div id="map"></div>
 
@@ -17,9 +16,8 @@
               https://developers.google.com/maps/documentation/javascript/load-maps-js-api
               for more information.
               -->
-            <script async
+            <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsCbly8V_UsYc2E8ebpocsVe1JAHFgF6U&callback=initMap&v=weekly"
-                defer
             ></script>
             <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
             <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -27,7 +25,11 @@
             <script>
                 const stations = {{ stations | raw }};
                 const clientInfo = {{ clientInfo | raw }};
-                console.log(clientInfo);
+                const stationMark = "./../../assets/icons/greenmark.png";
+                const icon = {
+                    url: 'https://image.noelshack.com/fichiers/2024/25/4/1718884782-whitemark.png', // url
+                    scaledSize: new google.maps.Size(75, 75), // size
+                };
                 const myLatLng = { lat: clientInfo.lat, lng: clientInfo.lon };
                 const map = new google.maps.Map(document.getElementById("map"), {
                     zoom: 17,
@@ -44,6 +46,7 @@
                     let marker = new google.maps.Marker({
                         position: property.coords,
                         map: map,
+                        icon: icon,
                         title: "Hello World!",
                     });
 
@@ -65,7 +68,6 @@
                     infoWindow.open(map, userMarker);
                 })
 
-                console.log(stations.length);
                 const markers = [];
 
                 for (let i = 0; i < stations.length; i++) {
@@ -73,9 +75,9 @@
                 }
                 const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
 
-
             </script>
             <div class="map-widget">
+                <img src="E:\WCC\wild-git\projet-3\assets\icons\greenmark.png" alt="">
                 {% include '/_includes/_footer-navbar.html.twig' %}
             </div>
         </section>
