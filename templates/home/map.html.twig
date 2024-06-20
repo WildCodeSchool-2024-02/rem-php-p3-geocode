@@ -1,0 +1,17 @@
+{%  extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {% block importmap %}{{ importmap('map') }}{% endblock %}
+{% endblock %}
+
+{% block body %}
+    <main class="map-main">
+        <section class="map-screen">
+            <h1 class="center-map">La map sera ici !</h1>
+            <div class="map-widget">
+                {% include '/_includes/_footer-navbar.html.twig' %}
+            </div>
+        </section>
+
+    </main>
+{% endblock %}

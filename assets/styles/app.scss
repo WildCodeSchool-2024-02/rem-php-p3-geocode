@@ -3,10 +3,21 @@
 @import "login";
 @import "footer-navbar";
 @import "contact-form";
+@import "userProfile";
+
 
 :root {
     --primary-blue: #21a89a;
     --secondary-colour: #7cd858;
     --background-color: #525B5A;
     --back-color: #e5e9e7;
+}
+
+.white-stripe {
+    height: 350px;
+}
+
+.white-stripe img {
+    height: 350px;
+    width: 350px;
 }
