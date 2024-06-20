@@ -38,6 +38,7 @@ function initMap()
 
     google.maps.event.addListener(map, 'click', (event) => {
         addMarker({coords:event.latLng});
+        console.log(data);
     })
 
     let mark1 = new google.maps.Marker({

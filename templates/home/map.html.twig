@@ -16,7 +16,7 @@
               https://developers.google.com/maps/documentation/javascript/load-maps-js-api
               for more information.
               -->
-            <script
+            <script async
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsCbly8V_UsYc2E8ebpocsVe1JAHFgF6U&callback=initMap&v=weekly"
             ></script>
             <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
@@ -74,6 +74,7 @@
                     markers.push(addMarker({coords:{lat:stations[i].latitude, lng:stations[i].longitude}, name:stations[i].stationName}));
                 }
                 const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
+
 
             </script>
             <div class="map-widget">
