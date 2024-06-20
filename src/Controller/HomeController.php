@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Repository\StationsRepository;
+use App\Service\IpService;
+use App\Service\UserLocationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
@@ -23,14 +26,25 @@ class HomeController extends AbstractController
     }
 
     #[Route('/map', name: 'map')]
-    public function map(StationsRepository $stationsRepository, ObjectNormalizer $objectNormalizer): Response
-    {
+    public function map(
+        StationsRepository $stationsRepository,
+        ObjectNormalizer $objectNormalizer,
+        Request $request,
+        IpService $ipService,
+        UserLocationService $userLoc
+    ): Response {
         $normalizer = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizer, []);
         $stations = $stationsRepository->findAll();
         $stations = $serializer->normalize($stations);
+        //$clientIp = $ipService->getIp($request);
+        $clientIp = '90.110.223.141';
+        $clientLocInfo = $userLoc->getUserLocation($clientIp);
 
-        return $this->render('home/map.html.twig', ['stations' => json_encode($stations)]);
+        //dd($clientLocInfo);
+
+        return $this->render('home/map.html.twig', ['stations' => json_encode($stations),
+            'clientInfo' => json_encode($clientLocInfo)]);
     }
 
     #[Route('/json', name: 'json')]

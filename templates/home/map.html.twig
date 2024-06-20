@@ -6,9 +6,10 @@
 
 {% block body %}
     <main class="map-main">
+
         <section class="map-screen">
             <div id="map"></div>
-            {{ dump(stations) }}
+
             <!--
               The `defer` attribute causes the script to execute after the full HTML
               document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -25,9 +26,11 @@
             <script src='/assets/map.js'></script>
             <script>
                 const stations = {{ stations | raw }};
-                const myLatLng = { lat: 50.63102272917646, lng: 3.054790378008385 };
+                const clientInfo = {{ clientInfo | raw }};
+                console.log(clientInfo);
+                const myLatLng = { lat: clientInfo.lat, lng: clientInfo.lon };
                 const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 12,
+                    zoom: 17,
                     center: myLatLng,
                 });
 
@@ -51,6 +54,17 @@
 
                     return marker;
                 }
+
+                let userMarker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: "Vous êtes ici !",
+                });
+                userMarker.addListener('click', function () {
+                    infoWindow.setContent('<h1>Vous êtes ici!</h1>');
+                    infoWindow.open(map, userMarker);
+                })
+
                 console.log(stations.length);
                 const markers = [];
 
