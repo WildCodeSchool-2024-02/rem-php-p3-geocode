@@ -48,16 +48,23 @@ class HomeController extends AbstractController
     }
 
     #[Route('/json', name: 'json')]
-    public function jsonTest(StationsRepository $stationsRepository, ObjectNormalizer $objectNormalizer): Response
-    {
+    public function jsonTest(
+        StationsRepository $stationsRepository,
+        ObjectNormalizer $objectNormalizer,
+        UserLocationService $userLoc
+    ): Response {
         $normalizer = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizer, []);
         $stations = $stationsRepository->findAll();
 
         $stations = $serializer->normalize($stations);
+
+        $clientIp = '90.110.223.141';
+        $clientLocInfo = $userLoc->getUserLocation($clientIp);
         //var_dump($stations);
         //die;
 
-        return new JsonResponse(array('stations' => $stations));
+        return new JsonResponse(array('stations' => $stations,
+            'clientInfo' => $clientLocInfo));
     }
 }
