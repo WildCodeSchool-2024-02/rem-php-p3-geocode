@@ -1,0 +1,15 @@
+.dashboard-main {
+    color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.categories-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.station-list {
+    margin-left: 4rem;
+}

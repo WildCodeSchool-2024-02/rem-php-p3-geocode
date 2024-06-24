@@ -16,7 +16,7 @@
               https://developers.google.com/maps/documentation/javascript/load-maps-js-api
               for more information.
               -->
-            <script async
+            <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsCbly8V_UsYc2E8ebpocsVe1JAHFgF6U&callback=initMap&v=weekly"
             ></script>
             <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
@@ -53,6 +53,7 @@
                     marker.addListener('click', function () {
                         infoWindow.setContent(property.name);
                         infoWindow.open(map, marker);
+                        console.log(property.inseecode)
                     })
 
                     return marker;
@@ -68,13 +69,16 @@
                     infoWindow.open(map, userMarker);
                 })
 
+                console.log(stations[1].inseeCode);
+
                 const markers = [];
 
                 for (let i = 0; i < stations.length; i++) {
-                    markers.push(addMarker({coords:{lat:stations[i].latitude, lng:stations[i].longitude}, name:stations[i].stationName}));
+                    markers.push(addMarker({coords:{lat:stations[i].latitude, lng:stations[i].longitude}, name:stations[i].stationName, inseecode:stations[i].inseeCode}));
                 }
                 const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
 
+                window.initMap;
 
             </script>
             <div class="map-widget">

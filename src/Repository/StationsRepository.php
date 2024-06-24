@@ -16,6 +16,22 @@ class StationsRepository extends ServiceEntityRepository
         parent::__construct($registry, Stations::class);
     }
 
+    public function findLikeInsee(string $insee): array
+    {
+        $result = [];
+
+        if (!empty($insee)) {
+            $result = $this->createQueryBuilder('s')
+                ->andWhere('s.inseeCode LIKE :insee')
+                ->setParameter('insee', $insee . '%')
+                ->orderBy('s.inseeCode', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
+
+        return $result;
+    }
+
     //    /**
     //     * @return Stations[] Returns an array of Stations objects
     //     */
