@@ -47,3 +47,15 @@
     height: 100%;
     z-index: 2;
 }
+
+@media screen and (max-width: 900px) {
+    .map-widget {
+        margin-top: -25%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .map-widget {
+        margin-top: -45%;
+    }
+}
