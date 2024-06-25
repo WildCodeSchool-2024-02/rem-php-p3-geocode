@@ -1,0 +1,29 @@
+.footer-navbar {
+    height: 50px;
+    width: 350px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin: auto;
+    margin-bottom: 1rem;
+    justify-items: center;
+    background-color: var(--primary-blue);
+    border-radius: 16px;
+    margin-top: 4rem;
+}
+
+.footer-navbar svg {
+    height: 90%;
+    color: var(--back-color);
+}
+
+.admin-btn {
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    background-color: var(--primary-blue);
+    border-radius: 16px;
+}
+
+.admin-btn svg {
+    color: var(--back-color);
+}

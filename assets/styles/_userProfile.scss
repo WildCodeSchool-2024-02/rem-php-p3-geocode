@@ -1,0 +1,51 @@
+.profile-main {
+    padding: 2rem;
+}
+.infos-user {
+    display: flex;
+    justify-content: center;
+}
+
+.infos-user article{
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+}
+.user-car {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lower-half {
+    display: flex;
+    margin-top: 2rem;
+    height: 500px;
+    justify-content: space-between;
+}
+
+.info-car {
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+.misc-infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.weather-API {
+    background-color: var(--background-color);
+}
+
+.misc-div {
+    background-color: var(--background-color);
+}
+
+.test-h1 {
+    color: green;
+}

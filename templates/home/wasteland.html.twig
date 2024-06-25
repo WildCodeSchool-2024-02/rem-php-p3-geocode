@@ -1,0 +1,55 @@
+<script>
+    const stations = {{ stations | raw }};
+    const clientInfo = {{ clientInfo | raw }};
+    const stationMark = "./../../assets/icons/greenmark.png";
+    const icon = {
+        url: 'https://image.noelshack.com/fichiers/2024/25/4/1718884782-whitemark.png', // url
+        scaledSize: new google.maps.Size(75, 75), // size
+    };
+    const myLatLng = { lat: clientInfo.lat, lng: clientInfo.lon };
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 17,
+        center: myLatLng,
+    });
+
+    let infoWindow = new google.maps.InfoWindow({
+        content: '<h3>Borne rechargeable</h3>' +
+            '<button class="markr-btn">Delete me !</button>'
+    });
+
+    function addMarker(property)
+    {
+        let marker = new google.maps.Marker({
+            position: property.coords,
+            map: map,
+            icon: icon,
+            title: "Hello World!",
+        });
+
+        marker.addListener('click', function () {
+            infoWindow.setContent(property.name);
+            infoWindow.open(map, marker);
+        })
+
+        return marker;
+    }
+
+    let userMarker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: "Vous êtes ici !",
+    });
+    userMarker.addListener('click', function () {
+        infoWindow.setContent('<h1>Vous êtes ici!</h1>');
+        infoWindow.open(map, userMarker);
+    })
+
+    const markers = [];
+
+    for (let i = 0; i < stations.length; i++) {
+        markers.push(addMarker({coords:{lat:stations[i].latitude, lng:stations[i].longitude}, name:stations[i].stationName}));
+    }
+    const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
+
+
+</script>

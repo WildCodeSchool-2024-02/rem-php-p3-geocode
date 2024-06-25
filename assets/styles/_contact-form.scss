@@ -1,0 +1,53 @@
+.return-arrow {
+    height: 40px;
+    display: flex;
+    position: absolute;
+    top: 2rem;
+    left: 1rem;
+    background-color: var(--back-color);
+    border:solid var(--background-color) 1px;
+    border-radius: 100%;
+}
+.return-arrow a svg {
+    height: 100%;
+    margin: auto;
+    color: var(--background-color);
+}
+
+.contact-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin-inline: auto;
+    margin-top: 1rem;
+    border-radius: 16px;
+    background-color: var(--background-color);
+}
+
+.contact-logo {
+    height: 4rem;
+}
+
+.logo-name {
+    font-size: 25pt;
+    margin: 0;
+}
+
+.contact-form {
+    margin-top: 2rem;
+    margin-inline: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-submit {
+    margin-inline: auto;
+    width: 250px;
+    background-color: var(--background-color);
+    border: none;
+}
+
+.contact-form .btn-primary:hover {
+    background-color: var(--secondary-colour);
+}
