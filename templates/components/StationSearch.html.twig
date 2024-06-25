@@ -1,0 +1,18 @@
+<div{{ attributes }}>
+    <div class="mb-3">
+        <label class="form-label" for="search">
+            Chercher une borne par code Insee :
+        </label>
+        <input type="search"
+               id="search"
+               class="form-control"
+               data-model="query">
+    </div>
+    {% for station in this.stations %}
+        <article>
+            <h2 class="mt-4"> {{ station.id }} / {{ station.inseeCode }} -
+                Adresse : {{ station.stationName }}, {{ station.stationAddress }}</h2>
+            <p>{{ station.idStation }}</p>
+        </article>
+    {% endfor %}
+</div>

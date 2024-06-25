@@ -5,3 +5,9 @@
     <a href="{{ path('contact_index') }}">{{ ux_icon('ri:info-i') }}</a>
     <a href="">{{ ux_icon('ph:gear-light') }}</a>
 </div>
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="admin-btn">
+            <a href="{{ path('dashboard_index') }}">{{ ux_icon('dashicons:admin-tools') }}</a>
+        </div>
+    {% endif %}
+
