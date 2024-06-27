@@ -3,7 +3,7 @@
     <a href="{{ path('profile') }}">{{ ux_icon('ion:car-sport-outline') }}</a>
     <a href="{{ path('map') }}">{{ ux_icon('ph:lightning-thin') }}</a>
     <a href="{{ path('contact_index') }}">{{ ux_icon('ri:info-i') }}</a>
-    <a href="">{{ ux_icon('ph:gear-light') }}</a>
+    <a href="{{ path('options') }}">{{ ux_icon('ph:gear-light') }}</a>
 </div>
     {% if is_granted("ROLE_ADMIN") %}
         <div class="admin-btn">

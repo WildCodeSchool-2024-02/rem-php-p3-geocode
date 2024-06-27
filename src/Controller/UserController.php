@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\CarRepository;
+use App\Repository\UserRepository;
 use App\Service\DistanceCalculatorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +16,11 @@ use App\Entity\User;
 class UserController extends AbstractController
 {
     #[Route('/profile', name: 'profile')]
-    public function index(DistanceCalculatorService $distanceCalc): Response
+    public function index(DistanceCalculatorService $distanceCalc, CarRepository $carRepository): Response
     {
         $battery = 87;
         $distance = $distanceCalc->calculateDistance(87);
+
 
         return $this->render('User/profile.html.twig', ['distance' => $distance, 'battery' => $battery]);
     }

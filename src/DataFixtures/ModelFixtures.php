@@ -11,36 +11,6 @@ class ModelFixtures extends Fixture
     public const CATEGORIES = [
         [
             'brand' => 'BMW',
-            'model' => 'iX1',
-            'isHybrid' => false
-        ],
-        [
-            'brand' => 'BMW',
-            'model' => 'iX3',
-            'isHybrid' => false
-        ],
-        [
-            'brand' => 'BMW',
-            'model' => 'i4',
-            'isHybrid' => false
-        ],
-        [
-            'brand' => 'BMW',
-            'model' => 'iX2',
-            'isHybrid' => false
-        ],
-        [
-            'brand' => 'BMW',
-            'model' => 'i5 Berline',
-            'isHybrid' => false
-        ],
-        [
-            'brand' => 'BMW',
-            'model' => 'i5 Touring',
-            'isHybrid' => false
-        ],
-        [
-            'brand' => 'BMW',
             'model' => 'iX',
             'isHybrid' => false
         ],

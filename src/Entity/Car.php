@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CarRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
@@ -16,15 +18,19 @@ class Car
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, options: ["default" => '#182c67'])]
     private ?string $color1 = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, options: ["default" => 'black'])]
     private ?string $color2 = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Model $model = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    private ?User $user = null;
+
 
     public function getId(): ?int
     {
@@ -75,6 +81,18 @@ class Car
     public function setModel(?Model $model): static
     {
         $this->model = $model;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
