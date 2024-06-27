@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\CarRepository;
+use App\Repository\ModelRepository;
 use App\Repository\StationsRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +18,14 @@ class DashboardController extends AbstractController
     public function index(): Response
     {
         return $this->render('dashboard/index.html.twig');
+    }
+
+    #[Route(path: 'cars', name: 'carList')]
+    public function carsList(ModelRepository $modelRepository): Response
+    {
+        $cars = $modelRepository->findAll();
+
+        return $this->render('dashboard/cars.html.twig', ['cars' => $cars]);
     }
 
     #[Route(path: 'users', name: 'userList')]

@@ -11,17 +11,7 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
 {
     public const CARS = [
         [
-            'reference' => 'BMW_iX1',
-            'color1' => '#606f72',
-            'color2' => 'black',
-        ],
-        [
-            'reference' => 'BMW_iX3',
-            'color1' => '#30333e',
-            'color2' => '#f4f4f4',
-        ],
-        [
-            'reference' => 'BMW_i4',
+            'reference' => 'BMW_iX',
             'color1' => '#182c67',
             'color2' => 'black',
         ],
@@ -32,6 +22,7 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
         foreach (self::CARS as $cars) {
             $car = new Car();
             $car->setModel($this->getReference($cars['reference']));
+            $this->addReference($car->getModel()->getModel(), $car);
             $car->setColor1($cars['color1']);
             $car->setColor2($cars['color2']);
 

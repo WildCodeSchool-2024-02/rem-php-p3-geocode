@@ -1,0 +1,15 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+<main class="option-main">
+    <div class="user-info">
+        <p>Vos véhicules enregistrés :</p>
+        <ul>
+            {% for car in app.user.cars %}
+                <li>{{ car.model.brand }} {{ car.model.model }}</li>
+            {% endfor %}
+        </ul>
+        <p>Vous souhaitez ajouter un véhicule ? <a href="{{ path('register_car') }}">+</a></p>
+    </div>
+</main>
+{% endblock %}

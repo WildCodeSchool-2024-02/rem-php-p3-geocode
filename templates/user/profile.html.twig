@@ -6,7 +6,9 @@
             <article>
                 <p>Où allons nous aujourd'hui {{ app.user.firstname}} ?</p>
                 <div class="user-car">
-                    <p>car.name</p>
+                    {% for car in user.cars %}
+                        <p>{{ car.model.brand }} {{ car.model.model }}</p>
+                    {% endfor %}
                     <p>car.picture</p>
                 </div>
             </article>
@@ -15,7 +17,9 @@
             <section class="info-car">
                 <div>
                     <p>Infos batterie :</p>
-                    <p>{{ battery }} % restant</p>
+                    <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 50px">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: {{ battery }}%">{{ battery }} % restant</div>
+                    </div>
                 </div>
                 <div>
                     <p>Distance restante :</p>

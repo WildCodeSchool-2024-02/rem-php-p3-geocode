@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Car;
 use App\Entity\User;
+use App\Form\CarType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,6 +63,27 @@ class SecurityController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
         ]);
+    }
+
+    #[Route(path: '/register/car', name: 'register_car')]
+    public function registerCars(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $car = new Car();
+        $form = $this->createForm(CarType::class, $car);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $car->setUser($user);
+            $car->setColor1('#182c67');
+            $car->setColor2('black');
+            $entityManager->persist($car);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('profile');
+        }
+
+        return $this->render('registration/registerCars.html.twig', ['registrationForm' => $form]);
     }
 
     #[Route(path: '/logout', name: 'logout')]
