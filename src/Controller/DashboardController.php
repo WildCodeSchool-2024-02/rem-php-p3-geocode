@@ -33,4 +33,10 @@ class DashboardController extends AbstractController
 
         return $this->render('dashboard/stations.html.twig', ['stations' => $stations]);
     }
+
+    #[Route(path: 'messages', name: 'messageList')]
+    public function messageList(): Response
+    {
+        return $this->render('dashboard/messages.html.twig');
+    }
 }

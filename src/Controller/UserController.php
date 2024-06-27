@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\DistanceCalculatorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,9 +14,12 @@ use App\Entity\User;
 class UserController extends AbstractController
 {
     #[Route('/profile', name: 'profile')]
-    public function index(): Response
+    public function index(DistanceCalculatorService $distanceCalc): Response
     {
-        return $this->render('User/profile.html.twig', []);
+        $battery = 87;
+        $distance = $distanceCalc->calculateDistance(87);
+
+        return $this->render('User/profile.html.twig', ['distance' => $distance, 'battery' => $battery]);
     }
 
     #[Route('/maptest', name: 'maptest')]

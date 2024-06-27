@@ -13,7 +13,7 @@ class Car
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
     #[ORM\Column(length: 10)]
@@ -21,6 +21,10 @@ class Car
 
     #[ORM\Column(length: 10)]
     private ?string $color2 = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Model $model = null;
 
     public function getId(): ?int
     {
@@ -59,6 +63,18 @@ class Car
     public function setColor2(string $color2): static
     {
         $this->color2 = $color2;
+
+        return $this;
+    }
+
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    public function setModel(?Model $model): static
+    {
+        $this->model = $model;
 
         return $this;
     }
