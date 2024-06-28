@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main class="dashboard-main">
+    {{ component('StationSearch') }}
+    <p class="d-inline-flex gap-1">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Liste des bornes :
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="station-list">
+            <p class="d-inline-flex gap-1">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Bornes 1 à 30 :
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample2">
+                <ul class="stations-container"></ul>
+                {% for station in stations|slice(0, 30) %}
+                    <li class="station-unit">Station : {{ station.stationName }}, {{ station.stationAddress }}</li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

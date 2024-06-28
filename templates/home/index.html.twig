@@ -4,10 +4,23 @@
 
 {% block body %}
     {% include '/_includes/_navbar.html.twig' %}
+    {% for category, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="pink-stripe">
-        <h1>
-            Buckle up, bitches !&nbsp;&#129304;
-        </h1>
+        {% if app.user.cars is empty %}
+            <h1>Vous n'avez pas encore enregistré de véhicule :</h1>
+            <p>Choisissez votre voiture <a href="{{ path('register_car') }}">ici</a></p>
+        {% endif %}
+        {% if app.user.cars %}
+            {% for car in app.user.cars %}
+                <h1>{{ car.model.brand }} {{ car.model.model }}</h1>
+            {% endfor %}
+        {% endif %}
     </div>
     <div class="white-stripe">
         <img src="{{ asset('images/91162536.webp') }}"

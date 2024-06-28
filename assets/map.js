@@ -14,7 +14,7 @@ import './styles/_footer-navbar.scss';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
-function initMap()
+async function initMap()
 {
     var directionsService = new google.maps.DirectionsService();
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -22,6 +22,12 @@ function initMap()
     const otherLatLng = { lat: 50.6193174, lng: 3.1314002 };
     const marker3 = { lat: 50.6026031, lng: 3.0697877};
     const marker4 = {coords:{ lat: 50.6915893, lng: 3.1741734}};
+
+    const {clientInfo, stations} = await fetch('http://localhost:8000/json')
+      .then(response => {return response.json()})
+      .then(json => json)
+
+    console.log(clientInfo, stations);
 
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
@@ -31,6 +37,7 @@ function initMap()
 
     google.maps.event.addListener(map, 'click', (event) => {
         addMarker({coords:event.latLng});
+        console.log(data);
     })
 
     let mark1 = new google.maps.Marker({
@@ -74,6 +81,7 @@ function initMap()
     addMarker({coords:{ lat: 50.6026031, lng: 3.0697877}});
     addMarker(marker4);
 
+
     calcRoute(directionsService, directionsRenderer);
 }
 
@@ -93,7 +101,8 @@ function calcRoute(directionsService, directionsRenderer)
             directionsRenderer.setDirections(response);
         }
     });
-    console.log(request);
+
+  console.log(request);
 }
 
 window.initMap = initMap;

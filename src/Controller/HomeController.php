@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -33,6 +34,12 @@ class HomeController extends AbstractController
         IpService $ipService,
         UserLocationService $userLoc
     ): Response {
+        $user = $this->getUser();
+
+        if ($user->getCars()->isEmpty()) {
+            $this->addFlash('danger', "Vous n'avez pas enregistré de véhicule !");
+            return $this->redirectToRoute('home_index');
+        }
         $normalizer = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizer, []);
         $stations = $stationsRepository->findAll();
@@ -47,17 +54,30 @@ class HomeController extends AbstractController
             'clientInfo' => json_encode($clientLocInfo)]);
     }
 
-    #[Route('/json', name: 'json')]
-    public function jsonTest(StationsRepository $stationsRepository, ObjectNormalizer $objectNormalizer): Response
+    #[Route('/options', name: 'options')]
+    public function options(): Response
     {
+        return $this->render('home/options.html.twig');
+    }
+
+    #[Route('/json', name: 'json')]
+    public function jsonTest(
+        StationsRepository $stationsRepository,
+        ObjectNormalizer $objectNormalizer,
+        UserLocationService $userLoc
+    ): Response {
         $normalizer = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizer, []);
         $stations = $stationsRepository->findAll();
 
         $stations = $serializer->normalize($stations);
+
+        $clientIp = '90.110.223.141';
+        $clientLocInfo = $userLoc->getUserLocation($clientIp);
         //var_dump($stations);
         //die;
 
-        return new JsonResponse(array('stations' => $stations));
+        return new JsonResponse(array('stations' => $stations,
+            'clientInfo' => $clientLocInfo));
     }
 }

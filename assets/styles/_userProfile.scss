@@ -21,7 +21,7 @@
 .lower-half {
     display: flex;
     margin-top: 2rem;
-    height: 500px;
+    height: 300px;
     justify-content: space-between;
 }
 
@@ -30,6 +30,9 @@
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
+    margin-right: 1rem;
+    justify-content: space-between;
+    font-size: large;
 }
 
 .misc-infos {
@@ -48,4 +51,8 @@
 
 .test-h1 {
     color: green;
+}
+
+.progress {
+    height: 100px;
 }
