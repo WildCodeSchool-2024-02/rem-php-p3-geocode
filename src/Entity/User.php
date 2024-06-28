@@ -56,8 +56,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Car::class)]
     private Collection $cars;
 
+    /**
+     * @var Collection<int, Message>
+     */
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Message::class, orphanRemoval: true)]
+    private Collection $messages;
+
     public function __construct()
     {
+        $this->messages = new ArrayCollection();
         $this->cars = new ArrayCollection();
     }
 
