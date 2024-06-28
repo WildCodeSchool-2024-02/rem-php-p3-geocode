@@ -17,16 +17,6 @@ use App\Form\MessageType;
 #[Route('/contact', name: 'contact_')]
 class ContactController extends AbstractController
 {
-    private Security $security;
-    private EntityManagerInterface $entityManager;
-
-
-    public function __construct(Security $security, EntityManagerInterface $entityManager)
-    {
-        $this->security = $security;
-        $this->entityManager = $entityManager;
-    }
-
     #[Route('/', name: 'index')]
     public function contactIndex(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -35,7 +25,7 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->security->getUser();
+            $user = $this->getUser();
             if ($user instanceof User) {
                 $message->setSender($user);
             }
