@@ -6,20 +6,37 @@
             <article>
                 <p>Où allons nous aujourd'hui {{ app.user.firstname}} ?</p>
                 <div class="user-car">
-                    <p>car.name</p>
-                    <p>car.picture</p>
+                    {% if app.user.cars is not empty %}
+                        {% for car in app.user.cars %}
+                            <p>{{ car.model.brand }} {{ car.model.model }}</p>
+                            <p>car.picture</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>N'oubliez pas d'ajouter un véhicule ! Pour le moment, vous n'irez nul part.</p>
+                    {% endif %}
                 </div>
             </article>
         </section>
         <section class="lower-half">
             <section class="info-car">
                 <div>
-                    <p>Infos batterie :</p>
-                    <p>{{ battery }} % restant</p>
+                    {% if app.user.cars is not empty %}
+                        <p>Infos batterie :</p>
+                        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 50px">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: {{ battery }}%">{{ battery }} % restant</div>
+                        </div>
+                    {% else%}
+                        <p>Pas de voiture renseignée !</p>
+                    {% endif %}
                 </div>
                 <div>
-                    <p>Distance restante :</p>
-                    <p>{{ distance }} Km</p>
+                    {% if app.user.cars is not empty %}
+                        <p>Distance restante :</p>
+                        <p>{{ distance }} Km</p>
+                    {% else %}
+                            <p>Pas de voiture renseignée !</p>
+                    {% endif %}
+
                 </div>
             </section>
             <section class="misc-infos">

@@ -23,6 +23,8 @@ body {
     font-size: clamp(2rem, 5vw, 3rem);
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    background-color: var(--primary-blue);
 }
 
 .white-stripe {

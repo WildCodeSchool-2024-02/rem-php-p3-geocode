@@ -55,6 +55,8 @@ class CsvCarsImportCommand extends Command
 
             $this->ema->persist($model);
         }
+        $this->ema->flush();
+
         foreach ($results as $result) {
             $modelExist = $this->ema->getRepository(Model::class)
                 ->findOneBy(['brand' => $result['brand'],
@@ -69,8 +71,6 @@ class CsvCarsImportCommand extends Command
                 $this->ema->flush();
             }
         }
-
-        $this->ema->flush();
 
         $ios->progressFinish();
 
