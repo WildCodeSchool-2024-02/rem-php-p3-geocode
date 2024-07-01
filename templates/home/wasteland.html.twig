@@ -29,6 +29,7 @@
         marker.addListener('click', function () {
             infoWindow.setContent(property.name);
             infoWindow.open(map, marker);
+            console.log(property.inseecode)
         })
 
         return marker;
@@ -44,12 +45,15 @@
         infoWindow.open(map, userMarker);
     })
 
+    console.log(stations[1].inseeCode);
+
     const markers = [];
 
     for (let i = 0; i < stations.length; i++) {
-        markers.push(addMarker({coords:{lat:stations[i].latitude, lng:stations[i].longitude}, name:stations[i].stationName}));
+        markers.push(addMarker({coords:{lat:stations[i].latitude, lng:stations[i].longitude}, name:stations[i].stationName, inseecode:stations[i].inseeCode}));
     }
     const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
 
+    window.initMap;
 
 </script>
