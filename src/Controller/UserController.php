@@ -18,8 +18,8 @@ class UserController extends AbstractController
     #[Route('/profile', name: 'profile')]
     public function index(DistanceCalculatorService $distanceCalc, CarRepository $carRepository): Response
     {
-        $battery = 87;
-        $distance = $distanceCalc->calculateDistance(87);
+        $battery = 64;
+        $distance = $distanceCalc->calculateDistance($battery);
 
 
         return $this->render('User/profile.html.twig', ['distance' => $distance, 'battery' => $battery]);

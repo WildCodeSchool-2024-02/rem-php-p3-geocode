@@ -16,13 +16,18 @@
               https://developers.google.com/maps/documentation/javascript/load-maps-js-api
               for more information.
               -->
+            <script src='/assets/map.js'></script>
             <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsCbly8V_UsYc2E8ebpocsVe1JAHFgF6U&callback=initMap&v=weekly"
             ></script>
             <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
             <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-            <script src='/assets/map.js'></script>
+
             <script>
+                window.initMap;
+
+                const directionsService = new google.maps.DirectionsService();
+                const directionsRenderer = new google.maps.DirectionsRenderer();
                 const stations = {{ stations | raw }};
                 const clientInfo = {{ clientInfo | raw }};
                 const stationMark = "./../../assets/icons/greenmark.png";
@@ -35,6 +40,32 @@
                     zoom: 17,
                     center: myLatLng,
                 });
+
+                directionsRenderer.setMap(map);
+                function calcRoute(directionsService, directionsRenderer, property)
+                {
+
+                    var start = new google.maps.LatLng(clientInfo.lat, clientInfo.lon);
+                    var end = new google.maps.LatLng(property.coords.lat, property.coords.lng);
+
+                    var request = {
+                        origin : start,
+                        destination : end,
+                        travelMode : 'DRIVING'
+                    };
+                    directionsService.route(request, function (response, status) {
+                        if (status === 'OK') {
+                            directionsRenderer.setDirections(response);
+                        }
+                    });
+
+                    return end;
+                }
+
+                function deleteRoute(directionsService, directionsRenderer)
+                {
+                    directionsRenderer.set('directions', null);
+                }
 
                 let infoWindow = new google.maps.InfoWindow({
                     content: '<h3>Borne rechargeable</h3>' +
@@ -50,11 +81,30 @@
                         title: "Hello World!",
                     });
 
+                    let infoWindow2 = new google.maps.InfoWindow({
+                        content: '<h3>Borne rechargeable</h3>' +
+                            '<button class="markr-btn">Delete me !</button>'
+                    });
+
+                    let contentString = "<div class='infowindow-container'>"+
+                        "<h4>"+ property.name +"</h4>" +
+                        "<button id=infowindow-btn-"+ property.inseecode + ">Choisir cette borne</button>"+
+                        "<button id=delete-btn-"+ property.inseecode + ">Supprimer l\'itinéraire</button>"+
+                        "</div>";
+
                     marker.addListener('click', function () {
-                        infoWindow.setContent(property.name);
-                        infoWindow.open(map, marker);
-                        console.log(property.inseecode)
+                        infoWindow2.setContent(contentString);
+                        infoWindow2.open(map, marker);
                     })
+
+                    google.maps.event.addListener(infoWindow2, 'domready', function() {
+                        document.getElementById(`infowindow-btn-${property.inseecode}`).addEventListener("click", function() {
+                            calcRoute(directionsService, directionsRenderer, property)
+                            });
+                        document.getElementById(`delete-btn-${property.inseecode}`).addEventListener("click", function() {
+                            deleteRoute(directionsService, directionsRenderer);
+                        });
+                    });
 
                     return marker;
                 }
@@ -67,9 +117,9 @@
                 userMarker.addListener('click', function () {
                     infoWindow.setContent('<h1>Vous êtes ici!</h1>');
                     infoWindow.open(map, userMarker);
+                    console.log(clientInfo);
                 })
 
-                console.log(stations[1].inseeCode);
 
                 const markers = [];
 
@@ -78,7 +128,6 @@
                 }
                 const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
 
-                window.initMap;
 
             </script>
             <div class="map-widget">

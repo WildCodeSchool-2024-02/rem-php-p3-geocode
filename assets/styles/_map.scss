@@ -39,6 +39,18 @@
     transform: translate(-50%, -50%);
 }
 
+.infowindow-container {
+    button{
+        background-color: var(--primary-blue);
+        border-color: var(--primary-blue);
+        border-radius: 8px;
+        margin-bottom: 0.3rem;
+    }
+    display: flex;
+    flex-direction: column;
+    color:blue;
+}
+
 /*
  * Always set the map height explicitly to define the size of the div element
  * that contains the map.

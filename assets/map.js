@@ -81,8 +81,6 @@ async function initMap()
     addMarker({coords:{ lat: 50.6026031, lng: 3.0697877}});
     addMarker(marker4);
 
-
-    calcRoute(directionsService, directionsRenderer);
 }
 
 function calcRoute(directionsService, directionsRenderer)
@@ -101,8 +99,6 @@ function calcRoute(directionsService, directionsRenderer)
             directionsRenderer.setDirections(response);
         }
     });
-
-  console.log(request);
 }
 
 window.initMap = initMap;
