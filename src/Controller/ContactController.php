@@ -26,9 +26,7 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
-            if ($user instanceof User) {
-                $message->setSender($user);
-            }
+            $message->setSender($user);
             $entityManager->persist($message);
             $entityManager->flush();
             $this->addFlash('success', 'Votre message a bien été envoyé');

@@ -6,20 +6,25 @@ use App\Entity\Topic;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Faker\Factory;
 
 class TopicFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
+        $topic1 = new Topic();
+        $topic1->setName('Signaler un bug');
+        $manager->persist($topic1);
+        $this->addReference('topic_1', $topic1);
 
-        for ($i = 1; $i <= 3; $i++) {
-            $topic = new Topic();
-            $topic->setName($faker->words(2, true));
-            $manager->persist($topic);
-            $this->addReference('topic_' . $i, $topic);
-        }
+        $topic2 = new Topic();
+        $topic2->setName('Signaler une borne HS');
+        $manager->persist($topic2);
+        $this->addReference('topic_2', $topic2);
+
+        $topic3 = new Topic();
+        $topic3->setName('Ma voiture n\'est pas dans la liste');
+        $manager->persist($topic3);
+        $this->addReference('topic_3', $topic3);
 
         $manager->flush();
     }
