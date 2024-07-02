@@ -41,12 +41,70 @@
             </section>
             <section class="misc-infos">
                 <article class="weather-API">
-                    <h1>API Météo</h1>
+                    <img src="" id="weather-icon" alt="Weather Icon">
+                    <div id="temp-div"></div>
+                    <div id="weather-info"></div>
                 </article>
                 <article class="misc-div">
-                    <h2>Dernière section</h2>
+                    <h3>Dernière section</h3>
                 </article>
             </section>
         </section>
+        <script>
+            const clientInfo = {{ clientInfo | raw }};
+            const lat = clientInfo.lat;
+            const lon = clientInfo.lon;
+
+            window.onload = getWeather();
+
+            function getWeather()
+            {
+                const apiKey = '311f69ecd26d9f2215cb098224466560';
+                const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+                fetch(currentWeatherUrl)
+                    .then(response => response.json())
+                    .then(data => { displayWeather(data);
+                    });
+            }
+
+            function displayWeather(data) {
+                const tempDivInfo = document.getElementById('temp-div');
+                const weatherInfoDiv = document.getElementById('weather-info');
+                const weatherIcon = document.getElementById('weather-icon');
+
+                weatherInfoDiv.innerHTML = '';
+                tempDivInfo.innerHTML = '';
+
+                if (data.cod === '404') {
+                    weatherInfoDiv.innerHTML = `<p>${data.message}</p>`;
+                } else {
+                    const cityName = data.name;
+                    const temperature = Math.round(data.main.temp - 273.15);
+                    const description = data.weather[0].description;
+                    const iconCode = data.weather[0].icon;
+                    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
+
+                    const temperatureHTML = `<p>${temperature}°C</p>`;
+
+                    const weatherHTML =
+                        `<p>${cityName}</p>
+                        <p>${description}</p>`;
+
+                    tempDivInfo.innerHTML = temperatureHTML;
+                    weatherInfoDiv.innerHTML = weatherHTML;
+                    weatherIcon.src = iconUrl;
+                    weatherIcon.alt = description;
+
+                    showImage();
+                }
+            }
+
+            function showImage() {
+                const weatherIcon = document.getElementById('weather-icon');
+                weatherIcon.style.display = 'block';
+            }
+        </script>
+        <script src="{{ asset('weatherApi.js') }}"></script>
     </main>
 {% endblock %}

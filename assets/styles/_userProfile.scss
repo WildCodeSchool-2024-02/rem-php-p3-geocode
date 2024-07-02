@@ -4,6 +4,11 @@
 .infos-user {
     display: flex;
     justify-content: center;
+    border-radius: 16px;
+}
+
+.profile-main section {
+    border-radius: 16px;
 }
 
 .infos-user article{
@@ -12,6 +17,7 @@
     flex-direction: column;
     width: 100%;
     padding: 1rem;
+    border-radius: 16px;
 }
 .user-car {
     display: flex;
@@ -42,11 +48,25 @@
 }
 
 .weather-API {
+    p {
+        margin: 0;
+    }
     background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 16px;
+}
+
+#weather-icon {
+    height: 150px;
 }
 
 .misc-div {
     background-color: var(--background-color);
+    border-radius: 16px;
 }
 
 .test-h1 {
