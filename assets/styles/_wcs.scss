@@ -9,13 +9,14 @@ $light: #fffbfb;
 
 body {
     margin:0;
+    height: 100vh;
     background-color: var(--back-color);
     color: $light;
 }
 
 
 .pink-stripe {
-    height: 50vh;
+    height: 15vh;
     width: 100%;
     display: flex;
     font-family: 'Varela Round', sans-serif;

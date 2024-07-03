@@ -18,12 +18,17 @@
         {% endif %}
         {% if app.user.cars %}
             {% for car in app.user.cars %}
+                <h1>Votre véhicule principal :</h1>
                 <h1>{{ car.model.brand }} {{ car.model.model }}</h1>
             {% endfor %}
         {% endif %}
     </div>
     <div class="white-stripe">
-        <img src="{{ asset('images/91162536.webp') }}"
-             alt="">
+        <img src="{{ asset('images/logol.png') }}" alt="">
+        <h1>Bienvenue sur Géocode !</h1>
+        <p><em><u>Votre</u></em> application pour trouver les bornes de recharge autour de vous, partout en France.</p>
+        <br>
+        <p>Avec une base de données de plus de 18 000 stations, vous ne serez loin de nous.</p>
+
     </div>
 {% endblock %}
