@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Topic;
+use App\Form\TopicType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,5 +65,45 @@ class ContactController extends AbstractController
             $entityManager->flush();
         }
         return $this->redirectToRoute('contact_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/topics/new', name: 'new_topic', methods: ['GET', 'POST'])]
+    public function newTopic(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $topic = new Topic();
+
+        $form = $this->createForm(TopicType::class, $topic);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($topic);
+            $entityManager->flush();
+            return $this->redirectToRoute('dashboard_topicList');
+        }
+
+        return $this->render('dashboard/topicEdit.html.twig', ['form' => $form]);
+    }
+
+    #[Route('/topics/{topic}', name: 'topic_edit', methods: ['GET', 'POST'])]
+    public function topicEdit(Request $request, Topic $topic, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(TopicType::class, $topic);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('dashboard_topicList', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('dashboard/topicEdit.html.twig', ['form' => $form]);
+    }
+
+    #[Route('/topics/{topic}/delete', name: 'topic_delete')]
+    public function topicDelete(Request $request, Topic $topic, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($topic);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('dashboard_topicList');
     }
 }
