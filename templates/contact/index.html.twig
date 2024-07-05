@@ -24,10 +24,10 @@
         {% for message in messages %}
             <tr>
                 <td>{{ message.id }}</td>
-                <td>Expéditeur : {{ message.sender.firstname }} {{ message.sender.lastname }}<br>
+                <td>Expéditeur : {{ message.sender.firstname }} {{ message.sender.lastname }}, Sujet : {{ message.topic.name }}<br>
                 {{ message.content }}</td>
                 <td>
-                    <a href="{{ path('contact_message_show', {'id': message.id}) }}">show</a>
+                    <a href="{{ path('contact_message_show', {'message': message.id}) }}">show</a>
                     <a href="{{ path('contact_message_delete', {'id': message.id}) }}">delete</a>
                 </td>
             </tr>

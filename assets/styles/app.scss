@@ -16,10 +16,17 @@
 }
 
 .white-stripe {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     height: 350px;
+    color: var(--background-color);
+    p {
+        margin: 0;
+    }
 }
 
 .white-stripe img {
-    height: 350px;
-    width: 350px;
+    height: 150px;
+    width: 120px;
 }
