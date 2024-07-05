@@ -18,12 +18,12 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class MessageType extends AbstractType
 {
-    private Security $security;
+    // private Security $security;
 
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
+    // public function __construct(Security $security)
+    // {
+    //     $this->security = $security;
+    // }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -32,20 +32,12 @@ class MessageType extends AbstractType
                 'class' => Topic::class,
                 'choice_label' => 'name',
             ])
+
             ->add('content', TextareaType::class)
+
             ->add('sender', HiddenType::class, [
-                'mapped' => false,
+                    'mapped' => false,
             ]);
-
-        $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-                $form = $event->getForm();
-
-                $user = $this->security->getUser();
-                if ($user instanceof User) {
-                    $form->get('sender')->setData($user->getId());
-                }
-            });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
