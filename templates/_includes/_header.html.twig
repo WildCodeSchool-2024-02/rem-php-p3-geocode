@@ -1,0 +1,16 @@
+<div class="header">
+        <div class="return-arrow">
+            <a href="{{ path('home_index') }}">{{ ux_icon('cil:arrow-left') }}</a>
+        </div>
+        <div class="logo-container">
+            <img class="logo" src="{{ asset('images/logol.png') }}" alt="">
+            <p class="logo-name">Géocode</p>
+        </div>
+            {% if is_granted("ROLE_ADMIN") %}
+                    <div class="admin-btn">
+        
+                <a href="{{ path('dashboard_index') }}">{{ ux_icon('dashicons:admin-tools') }}</a>
+                    </div>    
+
+            {% endif %}
+</div>

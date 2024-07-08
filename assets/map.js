@@ -11,6 +11,8 @@ import './bootstrap.js';
 import './styles/_map.scss';
 import './styles/_userProfile.scss';
 import './styles/_footer-navbar.scss';
+import './styles/_header.scss';
+
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 

@@ -1,19 +1,23 @@
 {%  extends 'base.html.twig' %}
 
 {% block body %}
-<main class="option-main">
-    <div class="contact-logo-container">
+    {# <div class="form_container"> #}
+    
+
+        <main class="option-main">
+    {# <div class="contact-logo-container">
         <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
         <p class="logo-name">Géocode</p>
-    </div>
-    <div class="user-info">
-        <p>Vos véhicules enregistrés :</p>
-        <ul>
-            {% for car in app.user.cars %}
-                <li>{{ car.model.brand }} {{ car.model.model }}</li>
-            {% endfor %}
-        </ul>
-        <p>Vous souhaitez ajouter un véhicule ? <a href="{{ path('register_car') }}">+</a></p>
-    </div>
-</main>
+    </div> #}
+            <div class="user-info">
+                <p>Vos véhicules enregistrés :</p>
+                <ul>
+                    {% for car in app.user.cars %}
+                        <li>{{ car.model.brand }} {{ car.model.model }}</li>
+                    {% endfor %}
+                </ul>
+                <p>Vous souhaitez ajouter un véhicule ? <a href="{{ path('register_car') }}">+</a></p>
+            </div>
+        </main>
+    {# </div> #}
 {% endblock %}

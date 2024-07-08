@@ -1,22 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="body-overlay">
-        <div class="blurred-bg-img"><img src="{{ asset('images/logol.png') }}" alt=""></div>
-            <div class="form_container">
-
-    <div class="return-arrow">
-        <a href="{{ path('home_index') }}">{{ ux_icon('cil:arrow-left') }}</a>
-    </div>
-    <div class="contact-logo-container">
-        <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
-        <p class="logo-name">Géocode</p>
-    </div>
-
-    <p class="form-message">Pour nous envoyer un message, veuillez remplir le formulaire ci-dessous en sélectionnant un motif.</p>
-
-        {{ include('contact/_form.html.twig', {'button_label': 'Envoyer'}) }}
+    {# <div class="body-overlay">
+        <div class="blurred-bg-img"><img src="{{ asset('images/logol.png') }}" alt=""></div> #}
+    <div class="form_container">
+        <div class="pink-stripe">
+            <h1>Envoyer-nous un message</h1>
         </div>
+        <div class="white-stripe">    
 
-</div>
+            {{ include('contact/_form.html.twig', {'button_label': 'Envoyer'}) }}
+        </div>
+    </div>
 {% endblock %}
