@@ -42,13 +42,14 @@
                 });
 
                 console.log(stations[1]);
+                console.log(stations[2]);
 
                 directionsRenderer.setMap(map);
                 function calcRoute(directionsService, directionsRenderer, property)
                 {
 
                     var start = new google.maps.LatLng(clientInfo.lat, clientInfo.lon);
-                    var end = new google.maps.LatLng(property.coords.lat, property.coords.lng);
+                    var end = new google.maps.LatLng(property.latitude, property.longitude);
 
                     var request = {
                         origin : start,
@@ -77,7 +78,7 @@
                 function addMarker(property)
                 {
                     let marker = new google.maps.Marker({
-                        position: property.coords,
+                        position: {lat:property.latitude, lng:property.longitude},
                         map: map,
                         icon: icon,
                         title: "Hello World!",
@@ -89,9 +90,11 @@
                     });
 
                     let contentString = "<div class='infowindow-container'>"+
-                        "<h4>"+ property.name +"</h4>" +
-                        "<button id=infowindow-btn-"+ property.inseecode + ">Choisir cette borne</button>"+
-                        "<button id=delete-btn-"+ property.inseecode + ">Supprimer l\'itinéraire</button>"+
+                        "<h4>"+ property.stationName +"</h4>" +
+                        "<p>"+ property.stationAddress +"</p>" +
+                        "<p>Puissance de la borne : "+ property.maxPower +"kW</p>" +
+                        "<button id=infowindow-btn-"+ property.inseeCode + ">Choisir cette borne</button>"+
+                        "<button id=delete-btn-"+ property.inseeCode + ">Supprimer l\'itinéraire</button>"+
                         "</div>";
 
                     marker.addListener('click', function () {
@@ -100,10 +103,10 @@
                     })
 
                     google.maps.event.addListener(infoWindow2, 'domready', function() {
-                        document.getElementById(`infowindow-btn-${property.inseecode}`).addEventListener("click", function() {
+                        document.getElementById(`infowindow-btn-${property.inseeCode}`).addEventListener("click", function() {
                             calcRoute(directionsService, directionsRenderer, property)
                             });
-                        document.getElementById(`delete-btn-${property.inseecode}`).addEventListener("click", function() {
+                        document.getElementById(`delete-btn-${property.inseeCode}`).addEventListener("click", function() {
                             deleteRoute(directionsService, directionsRenderer);
                         });
                     });
@@ -126,7 +129,7 @@
                 const markers = [];
 
                 for (let i = 0; i < stations.length; i++) {
-                    markers.push(addMarker({coords:{lat:stations[i].latitude, lng:stations[i].longitude}, name:stations[i].stationName, inseecode:stations[i].inseeCode}));
+                    markers.push(addMarker(stations[i]));
                 }
                 const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
 

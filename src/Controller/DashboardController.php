@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\CarRepository;
 use App\Repository\ModelRepository;
 use App\Repository\StationsRepository;
+use App\Repository\TopicRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,5 +49,13 @@ class DashboardController extends AbstractController
     public function messageList(): Response
     {
         return $this->render('dashboard/messages.html.twig');
+    }
+
+    #[Route(path: 'topics', name: 'topicList')]
+    public function topicList(TopicRepository $topicRepository): Response
+    {
+        $topics = $topicRepository->findAll();
+
+        return $this->render('dashboard/topics.html.twig', ['topics' => $topics]);
     }
 }

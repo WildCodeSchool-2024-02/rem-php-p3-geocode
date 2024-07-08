@@ -4,6 +4,12 @@
     flex-direction: column;
 }
 
+.contact-logo-container {
+    p {
+        color: var(--back-color);
+    }
+}
+
 .categories-container {
     display: flex;
     flex-direction: column;

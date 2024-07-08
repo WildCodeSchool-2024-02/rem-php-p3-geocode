@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Topics{% endblock %}
+
+{% block body %}
+    <h1>Edit Topics</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Edit a topic</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('dashboard_topicList') }}">back to list</a>
+{% endblock %}
