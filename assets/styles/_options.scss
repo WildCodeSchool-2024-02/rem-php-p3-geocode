@@ -1,5 +1,6 @@
 .add-button {
     background-color: var(--secondary-colour);
+    height: 25px;
     padding: 0.2rem;
     text-decoration: none;
     color: white;
@@ -12,9 +13,12 @@
     height: 25px;
     color: red;
     margin-left: 25px;
+    margin-bottom: 5px;
 }
 
 .user-info {
+    display: flex;
+    flex-direction: column;
     color: var(--background-color);
-    margin-left: 25%;
+    align-items: center;
 }

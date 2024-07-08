@@ -6,6 +6,10 @@
             <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
             <p class="logo-name">Géocode</p>
         </div>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure ?')">Importer le CSV</button>
+        {{ form_end(form) }}
         <p class="d-inline-flex gap-1">
             <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Liste des véhicules :
