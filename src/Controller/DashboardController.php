@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Car;
 use App\Entity\User;
 use App\Repository\CarRepository;
 use App\Repository\ModelRepository;
 use App\Repository\StationsRepository;
 use App\Repository\TopicRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -27,6 +29,15 @@ class DashboardController extends AbstractController
         $cars = $modelRepository->findAll();
 
         return $this->render('dashboard/cars.html.twig', ['cars' => $cars]);
+    }
+
+    #[Route(path: '{car}/delete', name: 'delete_car')]
+    public function deleteCar(Car $car, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($car);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('options');
     }
 
     #[Route(path: 'users', name: 'userList')]

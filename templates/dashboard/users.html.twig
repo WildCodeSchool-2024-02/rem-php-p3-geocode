@@ -2,6 +2,10 @@
 
 {% block body %}
     <main class="dashboard-main">
+        <div class="contact-logo-container">
+            <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
+            <p class="logo-name">Géocode</p>
+        </div>
         <ul class="user-list">
             {% for user in users %}
                 <li>Utilisateur : {{ user.firstname }} {{ user.lastname }}, {{ user.email }}</li>
