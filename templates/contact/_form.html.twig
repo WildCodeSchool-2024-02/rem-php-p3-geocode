@@ -1,4 +1,19 @@
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{{ form_errors(form) }}
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {# {{ form_widget(form) }} #}
+    {{ form_row(form.topic, {
+        label: 'Motif'
+    }) }}
+    {{ form_row(form.content, {
+        label: 'Message'
+    }) }}
+
+    <button class="btn btn-primary contact-submit">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
