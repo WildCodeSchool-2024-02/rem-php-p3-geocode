@@ -2,10 +2,11 @@
 
 {% block body %}
 <main class="dashboard-main">
-    <div class="contact-logo-container">
-        <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
-        <p class="logo-name">Géocode</p>
-    </div>
+    {% for message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+    {% endfor %}
     {{ component('StationSearch') }}
     {{ form_start(form) }}
     {{ form_widget(form) }}
