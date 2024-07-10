@@ -14,6 +14,8 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
             'reference' => 'BMW_iX',
             'color1' => '#182c67',
             'color2' => 'black',
+            'picture' => 'https://www.bmw.fr/content/dam/bmw/marketFR/bmw_fr/all-models/iX/
+            BMW-iX-white-offre-du-moment-1.png'
         ],
     ];
 
@@ -25,6 +27,7 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference($car->getModel()->getModel(), $car);
             $car->setColor1($cars['color1']);
             $car->setColor2($cars['color2']);
+            $car->setPicture($cars['picture']);
 
             $manager->persist($car);
         }

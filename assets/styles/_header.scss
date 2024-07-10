@@ -1,0 +1,56 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem 1rem;
+}
+
+.return-arrow {
+    height: 45px;
+    // display: flex;
+    // position: absolute;
+    // top: 2rem;
+    // left: 1rem;
+    background-color: var(--back-color);
+    border:solid var(--background-color) 1px;
+    border-radius: 100%;
+}
+.return-arrow a svg {
+    height: 100%;
+    margin: auto;
+    color: var(--background-color);
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // width: 70%;
+    margin-inline: auto;
+    // margin-top: 1rem;
+    border-radius: 16px;
+    // background-color: var(--background-color);
+}
+
+.logo {
+    height: 4rem;
+}
+
+.logo-name {
+    font-size: 25pt;
+    margin: 0;
+    color: var(--background-color);
+    font-weight: 500;
+}
+
+.admin-btn {
+    height: 50px;
+    width: 50px;
+    // margin: auto;
+    background-color: var(--primary-blue);
+    border-radius: 16px;
+}
+
+.admin-btn svg {
+    color: var(--back-color);
+}
