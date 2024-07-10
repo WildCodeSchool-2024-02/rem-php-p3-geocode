@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="dashboard-main">
+        <div class="contact-logo-container">
+            <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
+            <p class="logo-name">Géocode</p>
+        </div>
+        <p class="d-inline-flex gap-1">Liste des topics :
+        </p>
+        <div class="" id="collapseExample">
+            <a href="{{ path('contact_new_topic') }}">Ajouter un topic</a>
+            <br>
+            <ul class="stations-container"></ul>
+            {% for topic in topics %}
+                <li class="cars-unit"><strong>{{ topic.name }}</strong> <a href="{{ path('contact_topic_edit', {'topic':  topic.id }) }}">Modifier</a>
+                    <a href="{{ path('contact_topic_delete', {'topic': topic.id}) }}">Supprimer</a>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

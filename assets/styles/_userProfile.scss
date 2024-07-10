@@ -20,8 +20,16 @@
     border-radius: 16px;
 }
 .user-car {
+    img {
+        height: 100px;
+        border-radius: 16px;
+    }
+    p {
+        margin: 0;
+    }
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .lower-half {

@@ -3,6 +3,7 @@
 .DS_Store
 /public/uploads
 /assets/csv
+/assets/imports
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

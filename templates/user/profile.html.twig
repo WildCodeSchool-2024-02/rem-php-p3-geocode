@@ -1,31 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {# <div class="body-overlay">
-        <div class="blurred-bg-img">
-            <img src="{{ asset('images/logol.png') }}" alt="">
-        </div>
-        <div class="form_container"> #}
-            {# <main class="profile-main"> #}
-                {# <section class="infos-user">
-                    <article> #}
-                        <div class="pink-stripe">
-
-                            <h3>Où allons nous aujourd'hui {{ app.user.firstname}} ?</h3>
-                            <div class="user-car">
-                            {% if app.user.cars is not empty %}
-                                {% for car in app.user.cars %}
-                                    <p>{{ car.model.brand }} {{ car.model.model }}</p>
-                                    <img src="{{ car.picture }}" alt="">
-                                    {{ car.color2 }}
-                                {% endfor %}
-                            {% else %}
-                                <p>Pas de véhicule !</p>
-                            {% endif %}
-                        </div>
+                <div class="pink-stripe">
+                    <h3>Où allons nous aujourd'hui {{ app.user.firstname}} ?</h3>
+                    <div class="user-car">
+                    {% if app.user.cars is not empty %}
+                        {% for car in app.user.cars %}
+                            <p>{{ car.model.brand }} {{ car.model.model }}</p>
+                            <img src="{{ car.picture }}" alt="">
+                            {{ car.color2 }}
+                        {% endfor %}
+                        {% else %}
+                            <p>Pas de véhicule !</p>
+                        {% endif %}
                     </div>
-                    {# </article>
-                </section> #}
+                </div> 
                 <div class="white-stripe-profile">
                 <section class="lower-half">
                     <section class="info-car">
@@ -119,7 +108,4 @@
                     </section>
                 </section>
                 </div>
-                
-            {# </main> #}
-    {# </div>     #}
 {% endblock %}

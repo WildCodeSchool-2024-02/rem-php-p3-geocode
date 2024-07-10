@@ -8,16 +8,15 @@
     {# <div class="contact-logo-container">
         <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
         <p class="logo-name">Géocode</p>
-    </div> #}
-            <div class="user-info">
-                <p>Vos véhicules enregistrés :</p>
-                <ul>
-                    {% for car in app.user.cars %}
-                        <li>{{ car.model.brand }} {{ car.model.model }}</li>
-                    {% endfor %}
-                </ul>
-                <p>Vous souhaitez ajouter un véhicule ? <a href="{{ path('register_car') }}">+</a></p>
-            </div>
-        </main>
-    {# </div> #}
+    </div>
+    <div class="user-info">
+        <p>Vos véhicules enregistrés :</p>
+        <ul>
+            {% for car in app.user.cars %}
+                <li>{{ car.model.brand }} {{ car.model.model }} <a href="{{ path('dashboard_delete_car', {'car': car.id}) }}" onclick="return confirm('are u sure?')">{{ ux_icon('icon-park-twotone:delete-three', {class: 'delete-button'}) }}</a></li>
+            {% endfor %}
+        </ul>
+        <p>Vous souhaitez ajouter un véhicule ? <a href="{{ path('register_car') }}" >{{ ux_icon('zondicons:add-solid', {class: "add-button"}) }}</a></p>
+    </div>
+</main>
 {% endblock %}
