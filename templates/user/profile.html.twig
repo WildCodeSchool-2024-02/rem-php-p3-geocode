@@ -7,14 +7,13 @@
                     {% if app.user.cars is not empty %}
                         {% for car in app.user.cars %}
                             <p>{{ car.model.brand }} {{ car.model.model }}</p>
-                            <img src="{{ car.picture }}" alt="">
-                            {{ car.color2 }}
+                            <img src="{{ car.picture }}" alt="User personnal car's picture">
                         {% endfor %}
                         {% else %}
                             <p>Pas de véhicule !</p>
                         {% endif %}
                     </div>
-                </div> 
+                </div>
                 <div class="white-stripe-profile">
                 <section class="lower-half">
                     <section class="info-car">
@@ -39,7 +38,7 @@
                     </section>
                     <section class="misc-infos">
                         <article class="weather-API">
-                            <h3>Météo</h3>                  
+                            <h3>Météo</h3>
                             <img src="" id="weather-icon" alt="Weather Icon">
                             <div id="temp-div"></div>
                             <div id="weather-info"></div>

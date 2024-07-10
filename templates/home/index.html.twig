@@ -3,7 +3,6 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-    {# {% include '/_includes/_navbar.html.twig' %} #}
     {% for category, messages in app.flashes %}
         {% for message in messages %}
             <div class="alert alert-{{ category }}">
