@@ -26,18 +26,30 @@
                 window.initMap;
 
                 const directionsService = new google.maps.DirectionsService();
-                const directionsRenderer = new google.maps.DirectionsRenderer();
+                const directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers: true});
                 const stations = {{ stations | raw }};
                 const clientInfo = {{ clientInfo | raw }};
                 const stationMark = "./../../assets/icons/greenmark.png";
                 const icon = {
                     url: 'https://image.noelshack.com/fichiers/2024/25/4/1718884782-whitemark.png', // url
-                    scaledSize: new google.maps.Size(75, 75), // size
+                    scaledSize: new google.maps.Size(75, 75),// size
                 };
+                const userIcon = {
+                    url: 'https://image.noelshack.com/fichiers/2024/28/3/1720619699-user.png',
+                    scaledSize: new google.maps.Size(50, 50),
+                }
                 const myLatLng = { lat: clientInfo.lat, lng: clientInfo.lon };
                 const map = new google.maps.Map(document.getElementById("map"), {
                     zoom: 17,
                     center: myLatLng,
+                    styles: [
+                        {
+                            "featureType": "poi",
+                            "stylers": [
+                                { "visibility": "off" }
+                            ]
+                        }
+                    ],
                 });
 
                 console.log(stations[1]);
@@ -59,15 +71,20 @@
                     {
                         if (status === 'OK') {
                             directionsRenderer.setDirections(response);
+                            document.getElementById(`route-info-${property.inseeCode}`).style.backgroundColor = '#525b5a'
+                            document.getElementById(`distance-${property.inseeCode}`).innerHTML = "Distance " + response.routes[0].legs[0].distance.text + ",";
+                            document.getElementById(`duration-${property.inseeCode}`).innerHTML = response.routes[0].legs[0].duration.text;
                         }
                     });
-
                     return end;
                 }
 
-                function deleteRoute(directionsService, directionsRenderer)
+                function deleteRoute(directionsService, directionsRenderer, property)
                 {
                     directionsRenderer.set('directions', null);
+                    document.getElementById(`route-info-${property.inseeCode}`).style.backgroundColor = '';
+                    document.getElementById(`distance-${property.inseeCode}`).innerHTML = "";
+                    document.getElementById(`duration-${property.inseeCode}`).innerHTML = '';
                 }
 
                 let infoWindow = new google.maps.InfoWindow({
@@ -93,6 +110,7 @@
                         "<h4>"+ property.stationName +"</h4>" +
                         "<p>"+ property.stationAddress +"</p>" +
                         "<p>Puissance de la borne : "+ property.maxPower +"kW</p>" +
+                        "<div class=route-info id=route-info-"+ property.inseeCode +"><p class='distance' id=distance-" + property.inseeCode + " ></p><br><p id=duration-"+ property.inseeCode + "></p></div>" +
                         "<button id=infowindow-btn-"+ property.inseeCode + ">Se rendre à cette borne</button>"+
                         "<button id=delete-btn-"+ property.inseeCode + ">Supprimer l\'itinéraire</button>"+
                         "</div>";
@@ -108,7 +126,7 @@
                             calcRoute(directionsService, directionsRenderer, property)
                             });
                         document.getElementById(`delete-btn-${property.inseeCode}`).addEventListener("click", function() {
-                            deleteRoute(directionsService, directionsRenderer);
+                            deleteRoute(directionsService, directionsRenderer, property);
                         });
                     });
 
@@ -118,6 +136,7 @@
                 let userMarker = new google.maps.Marker({
                     position: myLatLng,
                     map: map,
+                    icon: userIcon,
                     title: "Vous êtes ici !",
                 });
                 userMarker.addListener('click', function () {
