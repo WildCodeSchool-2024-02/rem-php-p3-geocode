@@ -4,7 +4,11 @@
     <main class="dashboard-main">
         <ul class="user-list">
             {% for user in users %}
-                <li>Utilisateur : {{ user.firstname }} {{ user.lastname }}, {{ user.email }}</li>
+                <li><a href="{{ path('show_User', {'user': user.id}) }}">Utilisateur : {{ user.firstname }} {{ user.lastname }}, {{ user.email }}</a></li>
+                <p>
+                    <a href="{{ path('delete_User', {'user': user.id}) }}" onclick="return confirm('are u sure?')">{{ ux_icon('icon-park-twotone:delete-three', {class: 'delete-button'}) }}</a>
+
+                </p>
             {% endfor %}
         </ul>
     </main>

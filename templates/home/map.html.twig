@@ -52,8 +52,6 @@
                     ],
                 });
 
-                console.log(stations[1]);
-                console.log(stations[2]);
 
                 directionsRenderer.setMap(map);
                 function calcRoute(directionsService, directionsRenderer, property)
@@ -92,6 +90,13 @@
                         '<button class="markr-btn">Delete me !</button>'
                 });
 
+                let infoWindow3 = new google.maps.InfoWindow({
+                    content: '<h3>Borne rechargeable</h3>' +
+                        '<button class="markr-btn">Delete me !</button>'
+                });
+
+                let lastOpened = null;
+
                 function addMarker(property)
                 {
                     let marker = new google.maps.Marker({
@@ -115,10 +120,17 @@
                         "<button id=delete-btn-"+ property.inseeCode + ">Supprimer l\'itinéraire</button>"+
                         "</div>";
 
+                    function closeLastOpened() {
+                        if (lastOpened) {
+                            lastOpened.close();
+                        }
+                    }
 
                     marker.addListener('click', function () {
+                        closeLastOpened();
                         infoWindow2.setContent(contentString);
                         infoWindow2.open(map, marker);
+                        lastOpened = infoWindow2;
                     })
 
                     google.maps.event.addListener(infoWindow2, 'domready', function() {
@@ -155,16 +167,6 @@
                 const markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
 
 
-                const navBar = document.getElementsByClassName('fixed-bottom');
-
-
-                function fixNavbar() {
-                    navBar.classList.remove('fixed-bottom');
-                }
-
-                console.log(navBar);
-
-                fixNavbar;
                 </script>
                 <div class="map-widget">
                     <img src="E:\WCC\wild-git\projet-3\assets\icons\greenmark.png" alt="">
