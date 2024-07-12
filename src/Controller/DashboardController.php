@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Entity\User;
+use App\Entity\Message;
 use App\Form\CarCsvImportType;
 use App\Form\StationCsvImportType;
 use App\Repository\CarRepository;
@@ -11,6 +12,7 @@ use App\Repository\ModelRepository;
 use App\Repository\StationsRepository;
 use App\Repository\TopicRepository;
 use App\Repository\UserRepository;
+use App\Repository\MessageRepository;
 use App\Service\CarCsvImportService;
 use App\Service\FileUploader;
 use App\Service\StationCsvImportService;
@@ -96,10 +98,14 @@ class DashboardController extends AbstractController
         return $this->render('dashboard/stations.html.twig', ['stations' => $stations, 'form' => $form]);
     }
 
-    #[Route(path: 'messages', name: 'messageList')]
-    public function messageList(): Response
+    #[Route(path: 'messages', name: 'messageList', methods: ['GET'])]
+    public function show(MessageRepository $messageRepository): Response
     {
-        return $this->render('dashboard/messages.html.twig');
+        $messages = $messageRepository->findAll();
+
+        return $this->render('dashboard/messages.html.twig', [
+            'messages' => $messages,
+        ]);
     }
 
     #[Route(path: 'topics', name: 'topicList')]

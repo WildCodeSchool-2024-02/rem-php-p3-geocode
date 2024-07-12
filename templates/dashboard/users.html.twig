@@ -2,10 +2,30 @@
 
 {% block body %}
     <main class="dashboard-main">
-        <ul class="user-list">
-            {% for user in users %}
-                <li>Utilisateur : {{ user.firstname }} {{ user.lastname }}, {{ user.email }}</li>
-            {% endfor %}
-        </ul>
+        <div class="pink-stripe-admin">
+            <p>Menu Admin</p>
+            <p>Gestion des Utilisateurs</p>
+        </div>
+        <div class="white-stripe-admin-users">
+            <table class="admin-list-users">
+                <thead>
+                    <tr>
+                        <th class="th-users" scope="col"><p>Utilisateurs</p></th>
+                        <th class="th-actions" scope="col"><p>Actions</p></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td class="users"><p>{{ user.firstname }} {{ user.lastname }}</p><p>{{ user.email }}</p></td>
+                            <td class="actions">
+                                <p><a class="btn btn-secondary" href="#">Modifier</a></p>
+                                <p><a class="btn btn-danger" href="#">Supprimer</a></p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </main>
 {% endblock %}
