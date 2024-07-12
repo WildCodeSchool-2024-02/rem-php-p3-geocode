@@ -55,14 +55,14 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('message/{id}', name: 'message_delete', methods: ['POST'])]
+    #[Route('message/{message}/delete', name: 'message_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, Message $message, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $message->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($message);
-            $entityManager->flush();
-        }
-        return $this->redirectToRoute('contact_index', [], Response::HTTP_SEE_OTHER);
+
+        $entityManager->remove($message);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('contact_message_index');
     }
 
     #[Route('/topics/new', name: 'new_topic', methods: ['GET', 'POST'])]

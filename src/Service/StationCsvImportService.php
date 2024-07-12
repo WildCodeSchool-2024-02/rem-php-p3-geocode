@@ -29,23 +29,25 @@ class StationCsvImportService
         $results = $stmt->process($reader);
 
         foreach ($results as $result) {
-            //var_dump($result['geo_point_borne']);
-            //die;
-            $station = (new Stations())
-                ->setIdStation($result['id_station'])
-                ->setStationName($result['n_station'])
-                ->setStationAddress($result['ad_station'])
-                ->setInseeCode($result['code_insee'])
-                ->setLongitude($result['xlongitude'])
-                ->setLatitude($result['ylatitude'])
-                ->setMaxPower($result['puiss_max'])
-                ->setFree(false)
-                //->setGeopoint($result['geo_point_borne']);
-            ;
+            $station = $this->entityManager->getRepository(Stations::class)
+                ->findOneBy(['idStation' => $result['id_station']]);
 
-            $this->entityManager->persist($station);
+            if ($station === null) {
+                $station = (new Stations())
+                    ->setIdStation($result['id_station'])
+                    ->setStationName($result['n_station'])
+                    ->setStationAddress($result['ad_station'])
+                    ->setInseeCode($result['code_insee'])
+                    ->setLongitude($result['xlongitude'])
+                    ->setLatitude($result['ylatitude'])
+                    ->setMaxPower($result['puiss_max'])
+                    ->setFree(false)
+                ;
 
-            $this->entityManager->flush();
+                $this->entityManager->persist($station);
+                $this->entityManager->flush();
+            }
         }
+        $this->entityManager->flush();
     }
 }

@@ -12,7 +12,10 @@
         <article>
             <h2 class="mt-4"> {{ station.id }} / {{ station.inseeCode }} -
                 Adresse : {{ station.stationName }}, {{ station.stationAddress }}</h2>
-            <p>{{ station.idStation }}</p>
+            <p>{{ station.idStation }}
+                <a href="{{ path('dashboard_edit_Station', {'stations': station.id}) }}">{{ ux_icon('bx:edit', {class: 'edit-button'}) }}</a>
+                <a href="{{ path('dashboard_delete_Station', {'stations': station.id}) }}" onclick="return confirm('are u sure?')">{{ ux_icon('icon-park-twotone:delete-three', {class: 'delete-button'}) }}</a>
+            </p>
         </article>
     {% endfor %}
 </div>

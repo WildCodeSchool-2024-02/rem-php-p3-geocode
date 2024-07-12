@@ -2,11 +2,6 @@
 
 {% block body %}
 <main class="dashboard-main">
-    {% for message in messages %}
-        <div class="alert alert-{{ category }}">
-            {{ message }}
-        </div>
-    {% endfor %}
     {{ component('StationSearch') }}
     {{ form_start(form) }}
     {{ form_widget(form) }}

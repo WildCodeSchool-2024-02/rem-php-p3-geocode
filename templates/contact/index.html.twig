@@ -3,13 +3,6 @@
 {% block title %}Liste des messages{% endblock %}
 
 {% block body %}
-    <div class="return-arrow">
-        <a href="{{ path('home_index') }}">{{ ux_icon('cil:arrow-left') }}</a>
-    </div>
-    <div class="contact-logo-container">
-        <img class="contact-logo" src="{{ asset('images/logol.png') }}" alt="">
-        <p class="logo-name">Géocode</p>
-    </div>
     <h1>Liste des messages</h1>
 
     <table class="table">
@@ -28,12 +21,12 @@
                 {{ message.content }}</td>
                 <td>
                     <a href="{{ path('contact_message_show', {'message': message.id}) }}">show</a>
-                    <a href="{{ path('contact_message_delete', {'id': message.id}) }}">delete</a>
+                    <a href="{{ path('contact_message_delete', {'message': message.id}) }}" onclick="return confirm('are u sure?')">delete</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucun message dans la base.</td>
             </tr>
         {% endfor %}
         </tbody>

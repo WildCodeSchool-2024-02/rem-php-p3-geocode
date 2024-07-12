@@ -1,14 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {# <div class="body-overlay">
-        <div class="blurred-bg-img"><img src="{{ asset('images/logol.png') }}" alt=""></div> #}
     <div class="form_container">
         <div class="pink-stripe">
-            <h1>Envoyer-nous un message</h1>
+            <h1>Envoyez-nous un message</h1>
         </div>
-        <div class="white-stripe">    
-
+        <div class="white-stripe">
             {{ include('contact/_form.html.twig', {'button_label': 'Envoyer'}) }}
         </div>
     </div>
