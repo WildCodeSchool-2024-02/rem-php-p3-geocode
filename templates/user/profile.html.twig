@@ -7,7 +7,11 @@
                     {% if app.user.cars is not empty %}
                         {% for car in app.user.cars %}
                             <p>{{ car.model.brand }} {{ car.model.model }}</p>
-                            <img src="{{ car.picture }}" alt="User personnal car's picture">
+                            {% if car.picture %}
+                                <img src="{{ car.picture }}" alt="User personnal car's picture">
+                            {% else %}
+                                <img src="./../../assets/images/ioniq5n.webp" alt="User personnal car's picture">
+                            {% endif %}
                         {% endfor %}
                         {% else %}
                             <p>Pas de véhicule !</p>

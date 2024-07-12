@@ -12,11 +12,13 @@
             </a>
         </p>
         <div class="collapse" id="collapseExample">
-            <a href="#">Ajouter un véhicule</a>
+            <a href="{{ path('dashboard_create_Car') }}">Ajouter un véhicule {{ ux_icon('zondicons:add-solid', {class: "add-button"}) }}</a>
             <br>
             <ul class="stations-container"></ul>
             {% for car in cars %}
-                <li class="cars-unit"><strong>{{ car.brand }}, {{ car.model }}</strong> <a href="#">Modifier</a> <a href="#">Supprimer</a></li>
+                <li class="cars-unit"><strong>{{ car.brand }}, {{ car.model }}</strong>
+                    <a href="{{ path('dashboard_edit_model', {'model': car.id}) }}">{{ ux_icon('bx:edit', {class: 'edit-button'}) }}</a>
+                    <a href="{{ path('dashboard_delete_car', {'car': car.id}) }}" onclick="return confirm('are u sure?')">{{ ux_icon('icon-park-twotone:delete-three', {class: 'delete-button'}) }}</a></li>
             {% endfor %}
         </div>
     </main>
