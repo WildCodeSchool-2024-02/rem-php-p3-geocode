@@ -151,17 +151,6 @@ class DashboardController extends AbstractController
         return $this->redirectToRoute('dashboard_stationList');
     }
 
-
-
-    #[Route(path: 'stations/{stations}/delete', name: 'delete_Station')]
-    public function deleteStation(Stations $stations, EntityManagerInterface $entityManager): Response
-    {
-        $entityManager->remove($stations);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('dashboard_stationList');
-    }
-
     #[Route(path: 'messages', name: 'messageList', methods: ['GET'])]
     public function show(MessageRepository $messageRepository): Response
     {
