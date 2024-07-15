@@ -1,14 +1,56 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+{% endblock %}
+
 {% block body %}
     <main class="dashboard-main">
-        <ul class="categories-container">
-            <li class="category-link"><a href="{{ path('dashboard_userList') }}">Accès à la liste des utilisateurs :</a></li>
-            <li class="category-link"><a href="{{ path('dashboard_carList') }}">Accès à la liste des véhicules :</a></li>
-            <li class="category-link"><a href="{{ path('dashboard_stationList') }}">Accès à la liste des bornes :</a></li>
-            <li class="category-link"><a href="{{ path('contact_message_index') }}">Accès à la liste des messages :</a></li>
-            <li class="category-link"><a href="{{ path('dashboard_topicList') }}">Accès à la liste des topics :</a></li>
-        </ul>
+        <div class="pink-stripe-admin">
+            <p>Menu Admin</p>
+        </div>
+        <div class="white-stripe-admin">
+            {# <div class="icones-admin">
+                <p class="bi bi-people-fill"></p>
+                <p class="bi bi-car-front-fill"></p>
+                <p class="bi bi-ev-front"></p>
+                <p class="bi bi-envelope-fill"></p>
+                <p class="bi bi-patch-question-fill"></p>
+            </div>
+            <div class="categories-container">
+                <p class="category-link"><a href="{{ path('dashboard_userList') }}">Accès à la liste des utilisateurs</a></p>
+                <p class="category-link"><a href="{{ path('dashboard_carList') }}">Accès à la liste des véhicules</a></p>
+                <p class="category-link"><a href="{{ path('dashboard_stationList') }}">Accès à la liste des bornes</a></p>
+                <p class="category-link"><a href="{{ path('contact_message_index') }}">Accès à la liste des messages</a></p>
+                <p class="category-link"><a href="{{ path('dashboard_topicList') }}">Accès à la liste des topics</a></p>
+            </div> #}
+
+<table class="admin-list">
+  <tbody>
+    <tr>
+      <td class="icons"><p class="bi bi-people-fill"></p></td>
+      <td><p class="category-link"><a href="{{ path('dashboard_userList') }}">Accès à la liste des utilisateurs</a></p></td>
+    </tr>
+        <tr>
+      <td class="icons"><p class="bi bi-car-front-fill"></p></td>
+      <td><p class="category-link"><a href="{{ path('dashboard_carList') }}">Accès à la liste des véhicules</a></p></td>
+    </tr>
+        <tr>
+      <td class="icons"><p class="bi bi-ev-front"></p></td>
+      <td><p class="category-link"><a href="{{ path('dashboard_stationList') }}">Accès à la liste des bornes</a></p></td>
+    </tr>
+        <tr>
+      <td class="icons"><p class="bi bi-envelope-fill"></p></td>
+      <td><p class="category-link"><a href="{{ path('dashboard_messageList') }}">Accès à la liste des messages</a></p></td>
+    </tr>
+        <tr>
+      <td class="icons"><p class="bi bi-patch-question-fill"></p></td>
+      <td><p class="category-link"><a href="{{ path('dashboard_topicList') }}">Accès à la liste des topics</a></p></td>
+    </tr>
+      </tbody>
+</table>
+
+        </div>
     </main>
 
 {% endblock %}

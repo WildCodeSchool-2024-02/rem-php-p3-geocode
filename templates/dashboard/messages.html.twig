@@ -1,5 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{%  block body %}
+{% block title %}Liste des messages{% endblock %}
 
+{% block body %}
+    <main class="dashboard-main">
+        <div class="pink-stripe-admin">
+            <p>Menu Admin</p>
+            <p>Gestion des Messages</p>
+        </div>    
+        <div class="white-stripe-admin-messages">
+            <table class="admin-list-users">
+                <thead>
+                    <tr>
+                        <th class="th-users" scope="col"><p>Messages</p></th>
+                        <th class="th-actions" scope="col"><p>Actions</p></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for message in messages %}
+                        <tr>
+                            <td class="users">
+                                <p><strong>Expéditeur :</strong> {{ message.sender.firstname }} {{ message.sender.lastname }}</p>
+                                <p><strong>Sujet :</strong> {{ message.topic.name }}</p>
+                                <p>{{ message.content }}</p>
+                            </td>
+                            <td class="actions">
+                                <p><a class="btn btn-secondary" href="{{ path('contact_message_show', {'message': message.id}) }}">Voir</a></p>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Pas de nouveau message !</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
 {% endblock %}

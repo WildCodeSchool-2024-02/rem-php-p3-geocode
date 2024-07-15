@@ -1,20 +1,13 @@
 .dashboard-main {
     color: var(--background-color);
     display: flex;
-    flex-direction: column;
-}
-
-.contact-logo-container {
-    p {
-        color: var(--back-color);
-    }
-    margin-bottom: 3rem;
+    flex-direction: column;    
+    height: 100%;
 }
 
 .categories-container {
     display: flex;
     flex-direction: column;
-    align-self: center;
 }
 
 .station-list {
@@ -23,4 +16,235 @@
 
 .user-title {
     color: var(--background-color);
+}
+
+.pink-stripe-admin {
+    // height: 20vh;
+    width: 100%;
+    font-family: "Varela Round", sans-serif;
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--primary-blue);
+    display: flex;
+    color: white;
+    p {
+        margin: 0 0 0 0;
+    }
+}
+
+.white-stripe-admin {
+    background-color: white;
+    padding: 1rem;
+    width: 100%;    
+    height: 73%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+
+    a {
+        color: var(--background-color);
+        text-decoration: none;
+    }
+
+    .category-link {
+        text-align: left;
+        font-size: 1.1rem;
+    }
+
+    .bi {
+        text-align: center;
+    }
+    
+    .icons {
+        width: 3rem;
+        font-size: 2rem;
+    }
+
+    .icones-admin {
+        width: 15%;
+
+        p {
+            font-size: 1.2rem;
+            margin: 0 0 0 0;
+        }
+        display: flex;
+        flex-direction: column;
+        // height: 20rem;
+    }
+
+    .categories-container {
+        // height: 20rem;
+        p {
+            font-size: 1.2rem;
+        }
+    }
+
+    .admin-list-users {    
+        height: 85%;
+    }
+}
+
+
+
+html {
+    height: 100%;
+}
+
+// Gestion des utilisateurs
+
+.white-stripe-admin-users {
+    background-color: white;
+    padding: 1rem;
+    width: 100%;    
+    height: 73%;
+    display: flex;
+    align-items: flex-start;
+    // justify-content: center;
+    flex-direction: row;
+    text-align: center;
+
+    .btn-danger {
+        margin-bottom: 1rem;
+    }
+
+    .btn-secondary {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    a {
+        color: var(--back-color);
+        text-decoration: none;
+        margin: 0;
+    }
+
+    .admin-list-users {    
+    height: auto;
+    width: 100%;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    tr {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    td {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .users {
+        border-bottom: 1px solid;
+    }
+
+    .actions {
+        border-bottom: 1px solid;
+    }
+
+    th {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid;
+        // margin-bottom: 1rem;
+    }
+
+    .th-users, .users {
+        width: 70%;
+    }
+
+    .th-actions, .actions {
+        width: 30%;
+    }
+}
+
+// Gestion des topics
+
+.btn-stripe-admin {
+    p {
+        margin: .5rem 0 .5rem .5rem; 
+    }
+}
+
+// Gestion des messages
+
+.white-stripe-admin-messages {
+    background-color: white;
+    padding: 1rem;
+    width: 100%;    
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    // justify-content: center;
+    flex-direction: row;
+    text-align: center;
+
+    .btn-danger {
+        margin-bottom: 1rem;
+    }
+
+    .btn-secondary {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    a {
+        color: var(--back-color);
+        text-decoration: none;
+        margin: 0;
+    }
+
+    .admin-list-users {    
+    height: auto;
+    width: 100%;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    tr {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    td {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .users {
+        border-bottom: 1px solid;
+    }
+
+    .actions {
+        border-bottom: 1px solid;
+    }
+
+    th {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid;
+        // margin-bottom: 1rem;
+    }
+
+    .th-users, .users {
+        width: 70%;
+    }
+
+    .th-actions, .actions {
+        width: 30%;
+    }
 }

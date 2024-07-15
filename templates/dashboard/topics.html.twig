@@ -2,16 +2,33 @@
 
 {% block body %}
     <main class="dashboard-main">
-        <p class="d-inline-flex gap-1">Liste des topics :
-        </p>
-        <div class="" id="collapseExample">
-            <a href="{{ path('contact_new_topic') }}">Ajouter un topic</a>
-            <br>
-            <ul class="stations-container"></ul>
-            {% for topic in topics %}
-                <li class="cars-unit"><strong>{{ topic.name }}</strong> <a href="{{ path('contact_topic_edit', {'topic':  topic.id }) }}">Modifier</a>
-                    <a href="{{ path('contact_topic_delete', {'topic': topic.id}) }}">Supprimer</a>
-            {% endfor %}
+        <div class="pink-stripe-admin">
+            <p>Menu Admin</p>
+            <p>Gestion des Topics</p>
+        </div>
+        <div class="btn-stripe-admin">
+            <p><a class="btn btn-secondary new" href="{{ path('contact_new_topic') }}">Ajouter un topic</a></p>
+        </div>
+        <div class="white-stripe-admin-users">
+            <table class="admin-list-users">
+                <thead>
+                    <tr>
+                        <th class="th-users" scope="col"><p>Topics</p></th>
+                        <th class="th-actions" scope="col"><p>Actions</p></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for topic in topics %}
+                        <tr>
+                            <td class="users"><p>{{ topic.name }}</p></td>
+                            <td class="actions">
+                                <p><a class="btn btn-secondary" href="{{ path('contact_topic_edit', {'topic':  topic.id }) }}">Modifier</a></p>
+                                <p><a class="btn btn-danger" href="{{ path('contact_topic_delete', {'topic': topic.id}) }}">Supprimer</a></p>
+                            </td>
+                        </tr>                        
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </main>
-{% endblock %}
+    {% endblock %}

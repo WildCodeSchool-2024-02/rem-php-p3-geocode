@@ -37,16 +37,6 @@ class ContactController extends AbstractController
         return $this->render('contact/contact.html.twig', ['form' => $form]);
     }
 
-    #[Route('/message', name: 'message_index', methods: ['GET'])]
-    public function show(MessageRepository $messageRepository): Response
-    {
-        $messages = $messageRepository->findAll();
-
-        return $this->render('contact/index.html.twig', [
-            'messages' => $messages,
-        ]);
-    }
-
     #[Route('/message/{message}', name: 'message_show', methods: ['GET'])]
     public function showMessage(Message $message): Response
     {
@@ -55,14 +45,13 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('message/{message}/delete', name: 'message_delete', methods: ['GET', 'POST'])]
-    public function delete(Request $request, Message $message, EntityManagerInterface $entityManager): Response
+    #[Route('/message/{message}/delete', name: 'message_delete')]
+    public function messageDelete(Request $request, Message $message, EntityManagerInterface $entityManager): Response
     {
-
         $entityManager->remove($message);
         $entityManager->flush();
 
-        return $this->redirectToRoute('contact_message_index');
+        return $this->redirectToRoute('dashboard_messageList');
     }
 
     #[Route('/topics/new', name: 'new_topic', methods: ['GET', 'POST'])]

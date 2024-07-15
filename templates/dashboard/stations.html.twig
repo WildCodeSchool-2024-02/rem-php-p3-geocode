@@ -2,6 +2,17 @@
 
 {% block body %}
 <main class="dashboard-main">
+    {% for category, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+        <div class="pink-stripe-admin">
+            <p>Menu Admin</p>
+            <p>Gestion des Bornes</p>
+        </div>
     {{ component('StationSearch') }}
     {{ form_start(form) }}
     {{ form_widget(form) }}

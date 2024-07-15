@@ -2,13 +2,30 @@
 
 {% block body %}
     <main class="dashboard-main">
-        <ul class="user-list">
-            {% for user in users %}
-                <li>
-                    <a href="{{ path('show_User', {'user': user.id}) }}">Utilisateur : {{ user.firstname }} {{ user.lastname }}, {{ user.email }}</a>
-                    <a href="{{ path('delete_User', {'user': user.id}) }}" onclick="return confirm('are u sure?')">{{ ux_icon('icon-park-twotone:delete-three', {class: 'delete-button'}) }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="pink-stripe-admin">
+            <p>Menu Admin</p>
+            <p>Gestion des Utilisateurs</p>
+        </div>
+        <div class="white-stripe-admin-users">
+            <table class="admin-list-users">
+                <thead>
+                    <tr>
+                        <th class="th-users" scope="col"><p>Utilisateurs</p></th>
+                        <th class="th-actions" scope="col"><p>Actions</p></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td class="users"><p>{{ user.firstname }} {{ user.lastname }}</p><p>{{ user.email }}</p></td>
+                            <td class="actions">
+                                <p><a class="btn btn-secondary" href="{{ path('show_User', {'user': user.id}) }}">Afficher</a></p>
+                                <p><a class="btn btn-danger" href="{{ path('delete_User', {'user': user.id}) }}">Supprimer</a></p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </main>
 {% endblock %}
