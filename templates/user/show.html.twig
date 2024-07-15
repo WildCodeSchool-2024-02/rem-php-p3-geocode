@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur {{ user.firstname }} {{ user.lastname }}{% endblock %}
+
+{% block body %}
+    <h1 class="user-title">Utilisateur <a href="{{ path('edit_User', {'user': user.id}) }}">{{ ux_icon('bx:edit', {class: 'edit-button'}) }}</a></h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Utilisateur</th>
+            <td>{{ user.firstname }} {{ user.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Informations</th>
+            <td>{{ user.email }} <br>{{ user.roles.0 }} <br> {{ user.address }}</td>
+        </tr>
+        <tr>
+            <th>Importants</th>
+            <td>{{ user.telNumber }} <br>
+                Ajouter un véhicule : <a href="{{ path('add_car', {'user': user.id}) }}" >{{ ux_icon('zondicons:add-solid', {class: "add-button"}) }}</a>
+                <br>
+                <ul>
+                    {% for car in user.cars %}
+                        <li>{{ car.model.brand }} {{ car.model.model }} <a href="{{ path('delete_user_car', {'car': car.id, 'user': user.id}) }}" onclick="return confirm('are u sure?')">{{ ux_icon('icon-park-twotone:delete-three', {class: 'delete-button'}) }}</a></li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('dashboard_userList') }}">back to list</a>
+
+{% endblock %}

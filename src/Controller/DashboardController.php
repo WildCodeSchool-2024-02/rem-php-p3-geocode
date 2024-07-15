@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Model;
+use App\Entity\Stations;
 use App\Entity\User;
 use App\Entity\Message;
 use App\Form\CarCsvImportType;
+use App\Form\ModelType;
 use App\Form\StationCsvImportType;
+use App\Form\StationType;
 use App\Repository\CarRepository;
 use App\Repository\ModelRepository;
 use App\Repository\StationsRepository;
@@ -56,6 +60,39 @@ class DashboardController extends AbstractController
         return $this->render('dashboard/cars.html.twig', ['cars' => $cars, 'form' => $form]);
     }
 
+    #[Route(path: 'new/car', name: 'create_Car')]
+    public function createCar(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $model = new Model();
+        $form = $this->createForm(ModelType::class, $model);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $model->setHybrid(false);
+            $entityManager->persist($model);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('dashboard_carList');
+        }
+
+        return $this->render('dashboard/addCar.html.twig', ['form' => $form]);
+    }
+
+    #[Route(path: '{model}/edit', name: 'edit_model')]
+    public function editModel(Model $model, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $form = $this->createForm(ModelType::class, $model);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('dashboard_carList');
+        }
+
+        return $this->render('dashboard/editModel.html.twig', ['form' => $form]);
+    }
+
     #[Route(path: '{car}/delete', name: 'delete_car')]
     public function deleteCar(Car $car, EntityManagerInterface $entityManager): Response
     {
@@ -63,14 +100,6 @@ class DashboardController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('options');
-    }
-
-    #[Route(path: 'users', name: 'userList')]
-    public function userList(UserRepository $userRepository): Response
-    {
-        $users = $userRepository->findAll();
-
-        return $this->render('dashboard/users.html.twig', ['users' => $users]);
     }
 
     #[Route(path: 'stations', name: 'stationList')]
@@ -96,6 +125,41 @@ class DashboardController extends AbstractController
         }
 
         return $this->render('dashboard/stations.html.twig', ['stations' => $stations, 'form' => $form]);
+    }
+
+    #[Route(path: 'stations/{stations}/edit', name: 'edit_Station')]
+    public function editStation(Stations $stations, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $form = $this->createForm(StationType::class, $stations);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('dashboard_stationList');
+        }
+
+        return $this->render('dashboard/editStation.html.twig', ['form' => $form]);
+    }
+
+    #[Route(path: 'stations/{stations}/delete', name: 'delete_Station')]
+    public function deleteStation(Stations $stations, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($stations);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('dashboard_stationList');
+    }
+
+
+
+    #[Route(path: 'stations/{stations}/delete', name: 'delete_Station')]
+    public function deleteStation(Stations $stations, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($stations);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('dashboard_stationList');
     }
 
     #[Route(path: 'messages', name: 'messageList', methods: ['GET'])]
